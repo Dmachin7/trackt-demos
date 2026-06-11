@@ -20,7 +20,7 @@
 
     /* ── NAVBAR ── */
     header {
-      position: sticky; top: 0; z-index: 50;
+      position: sticky; top: 32px; z-index: 50;
       background: rgba(15,15,15,0.95); backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(75,85,99,0.5);
       transition: border-color 0.3s;
@@ -49,7 +49,7 @@
     }
     .nav-mobile-btn { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: #d1d5db; cursor: pointer; border: none; background: none; }
     @media (min-width: 1024px) { .nav-mobile-btn { display: none; } }
-    .mobile-menu { display: none; overflow: hidden; max-height: 0; transition: max-height 0.3s ease; background: #111827; border-top: 1px solid rgba(75,85,99,0.4); }
+    .mobile-menu { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; background: #111827; border-top: 1px solid rgba(75,85,99,0.4); }
     .mobile-menu.open { max-height: 400px; }
     .mobile-menu nav { padding: 12px 20px; display: flex; flex-direction: column; gap: 4px; }
     .mobile-menu nav a { color: #d1d5db; font-size: 14px; font-weight: 500; padding: 12px 16px; border-radius: 6px; transition: background 0.15s, color 0.15s; }
@@ -114,7 +114,12 @@
     .stats-bg { background: var(--dark-2); position: relative; overflow: hidden; }
     .stats-grid-bg { position: absolute; inset: 0; opacity: 0.03; background-image: linear-gradient(#f59e0b 1px, transparent 1px), linear-gradient(90deg, #f59e0b 1px, transparent 1px); background-size: 60px 60px; }
     .stats-top-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 384px; height: 4px; background: var(--amber); }
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .stats-grid { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 12px; }
+    .stats-grid::-webkit-scrollbar { height: 3px; }
+    .stats-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 3px; }
+    .stats-grid::-webkit-scrollbar-thumb { background: rgba(245,158,11,0.4); border-radius: 3px; }
+    .stat-card { flex: 0 0 230px; scroll-snap-align: start; }
+    @media (min-width: 640px) { .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); overflow-x: visible; padding-bottom: 0; } .stat-card { flex: none; } }
     @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
     .stat-card { background: rgba(15,15,15,0.6); border: 1px solid #1f2937; border-radius: 4px; padding: 32px 20px; text-align: center; transition: border-color 0.3s, transform 0.3s; }
     .stat-card:hover { border-color: rgba(245,158,11,0.4); transform: translateY(-4px); }
@@ -282,12 +287,11 @@
     .footer-demo-badge a:hover { color: #5681d0; }
 
     /* ── BACK TO GALLERY BAR ── */
-    #gallery-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 99999; background: rgba(10,10,15,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(22,180,210,0.2); padding: 8px 20px; display: flex; align-items: center; gap: 12px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-    #gallery-bar a { display: inline-flex; align-items: center; gap: 6px; color: #16b4d2; font-size: 12px; font-weight: 600; text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
-    #gallery-bar a:hover { color: #5681d0; }
-    #gallery-bar .sep { color: rgba(255,255,255,0.15); font-size: 12px; }
-    #gallery-bar .label { color: rgba(255,255,255,0.4); font-size: 12px; }
-    body { padding-top: 37px; }
+    #gallery-bar { position: fixed; top: 0; left: 0; right: 0; height: 32px; z-index: 99999; background: rgba(10,10,15,0.93); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(22,180,210,0.15); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    #gallery-bar a { display: inline-flex; align-items: center; gap: 5px; color: #16b4d2; font-size: 11px; font-weight: 600; text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
+    #gallery-bar a:hover { color: #5cd3e8; }
+    #gallery-bar .label { color: rgba(255,255,255,0.25); font-size: 11px; letter-spacing: 0.3px; }
+    body { padding-top: 32px; }
   </style>
 </head>
 <body>
@@ -295,10 +299,9 @@
   <!-- Gallery bar -->
   <div id="gallery-bar">
     <a href="/">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
       Back to Gallery
     </a>
-    <span class="sep">|</span>
     <span class="label">Trackt Tech Demo</span>
   </div>
 
