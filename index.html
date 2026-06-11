@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live Demos — Trackt Tech</title>
+  <script>(function(){var t=localStorage.getItem('trackt-demo-theme');if(!t)t='dark';if(t==='dark')document.documentElement.classList.add('dark');}());</script>
   <meta name="description" content="Four interactive website demos built by Trackt Tech — towing dispatch, booking flow, CRM pipeline, and eCommerce store." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +21,25 @@
       --border: #e5e7eb;
       --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
       --shadow-hover: 0 4px 12px rgba(0,0,0,0.10), 0 16px 40px rgba(0,0,0,0.08);
+      --c-header-bg: rgba(255,255,255,0.96);
+      --c-card-bg: #ffffff;
+      --c-footer-bg: #101418;
+    }
+    html.dark {
+      --ink: #e2e8f0;
+      --ink-2: #94a3b8;
+      --ink-3: #475569;
+      --bg: #0d1117;
+      --bg-2: #111827;
+      --border: #1e2a38;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,0.4), 0 16px 40px rgba(0,0,0,0.3);
+      --c-header-bg: rgba(13,17,23,0.97);
+      --c-card-bg: #111827;
+      --c-footer-bg: #0a0d14;
+    }
+    .theme-transition, .theme-transition *, .theme-transition *::before, .theme-transition *::after {
+      transition: background-color 280ms ease, border-color 280ms ease, color 280ms ease !important;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -33,7 +53,7 @@
     /* ── HEADER ── */
     .site-header {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(255,255,255,0.96);
+      background: var(--c-header-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
@@ -105,7 +125,7 @@
 
     /* ── CASE STUDY CARD ── */
     .demo-card {
-      background: #fff;
+      background: var(--c-card-bg);
       border: 1px solid var(--border);
       border-radius: 20px; overflow: hidden;
       box-shadow: var(--shadow);
@@ -169,6 +189,10 @@
     .tag-book { background: rgba(5,150,105,0.1); color: #065f46; }
     .tag-crm  { background: rgba(22,180,210,0.1); color: #0e7490; }
     .tag-shop { background: rgba(234,88,12,0.1); color: #c2410c; }
+    html.dark .tag-tow  { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    html.dark .tag-book { background: rgba(5,150,105,0.15); color: #34d399; }
+    html.dark .tag-crm  { background: rgba(22,180,210,0.15); color: #38bdf8; }
+    html.dark .tag-shop { background: rgba(234,88,12,0.15); color: #fb923c; }
     .card-title {
       font-size: clamp(20px, 3vw, 28px);
       font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
@@ -195,7 +219,7 @@
     .demo-card:hover .card-cta svg { transform: translateX(3px); }
 
     /* ── FOOTER ── */
-    .site-footer { background: var(--ink); padding: 72px 24px; }
+    .site-footer { background: var(--c-footer-bg); padding: 72px 24px; }
     .footer-inner {
       max-width: 1120px; margin: 0 auto;
       display: flex; flex-direction: column; align-items: center; gap: 36px; text-align: center;
@@ -239,6 +263,19 @@
       .hero { padding: 52px 20px 48px; }
       .demos { padding: 48px 16px 64px; }
     }
+
+    /* ── THEME TOGGLE ── */
+    #theme-toggle {
+      width: 36px; height: 36px; border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--ink-3);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    #theme-toggle:hover { border-color: var(--teal); color: var(--teal); }
+    #theme-toggle svg { width: 18px; height: 18px; }
   </style>
 </head>
 <body>
@@ -252,10 +289,16 @@
         </div>
         <span class="logo-name">Trackt Tech</span>
       </a>
-      <a href="https://trackt.tech" class="header-link" target="_blank" rel="noopener">
-        trackt.tech
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button id="theme-toggle" aria-label="Toggle theme">
+          <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="icon-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <a href="https://trackt.tech" class="header-link" target="_blank" rel="noopener">
+          trackt.tech
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -507,6 +550,31 @@
     </div>
   </footer>
 
+  <script>
+    (function(){
+      var toggle = document.getElementById('theme-toggle');
+      var moon = document.getElementById('icon-moon');
+      var sun = document.getElementById('icon-sun');
+      function applyTheme(t) {
+        if (t === 'dark') {
+          document.documentElement.classList.add('dark');
+          moon.style.display = 'none'; sun.style.display = '';
+        } else {
+          document.documentElement.classList.remove('dark');
+          moon.style.display = ''; sun.style.display = 'none';
+        }
+        localStorage.setItem('trackt-demo-theme', t);
+      }
+      var isDark = document.documentElement.classList.contains('dark');
+      if (isDark) { moon.style.display = 'none'; } else { sun.style.display = 'none'; }
+      toggle.addEventListener('click', function() {
+        var dark = document.documentElement.classList.contains('dark');
+        document.documentElement.classList.add('theme-transition');
+        applyTheme(dark ? 'light' : 'dark');
+        setTimeout(function(){ document.documentElement.classList.remove('theme-transition'); }, 300);
+      });
+    }());
+  </script>
   <script>
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });

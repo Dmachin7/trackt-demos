@@ -297,12 +297,13 @@
     .contact-info h3 { color: var(--c-ink); font-size: 20px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.01em; }
     .contact-info-items { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
     .info-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--c-card); border: 1px solid var(--c-border); border-radius: 4px; transition: border-color 0.2s; text-decoration: none; color: inherit; }
+    .info-item > div:not(.info-item-icon) { min-width: 0; flex: 1; }
     a.info-item:hover { border-color: rgba(245,158,11,0.5); }
     .info-item-icon { width: 40px; height: 40px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
     a.info-item:hover .info-item-icon { background: rgba(245,158,11,0.2); }
     .info-item-icon svg { width: 20px; height: 20px; color: var(--amber); }
     .info-item-label { color: var(--c-ink-4); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
-    .info-item-value { color: var(--c-ink); font-weight: 700; font-size: 16px; }
+    .info-item-value { color: var(--c-ink); font-weight: 700; font-size: 16px; overflow-wrap: break-word; word-break: break-word; min-width: 0; }
     .info-item-sub { color: var(--c-ink-4); font-size: 12px; margin-top: 2px; }
     .emergency-box { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3); border-radius: 4px; padding: 20px; }
     .emergency-box h4 { color: var(--amber-light); font-size: 14px; font-weight: 700; margin-bottom: 8px; }
@@ -404,9 +405,10 @@
     .step-circle.active { border-color: var(--amber); background: var(--amber); color: #000; }
     .step-circle.done { border-color: rgba(34,197,94,0.5); background: rgba(34,197,94,0.15); color: #22c55e; }
     .step-label { font-size: 11px; font-weight: 600; color: var(--c-ink-4); white-space: nowrap; }
+    @media (max-width: 479px) { .step-label { display: none; } }
     .step-label.active { color: var(--amber); }
     .step-label.done { color: #4ade80; }
-    .step-connector { flex: 1; height: 2px; background: var(--c-border); margin: 0 8px; min-width: 20px; }
+    .step-connector { flex: 1; height: 2px; background: var(--c-border); margin: 0 4px; min-width: 12px; }
     .step-connector.done { background: rgba(34,197,94,0.4); }
 
     .wizard-pane { display: none; }
