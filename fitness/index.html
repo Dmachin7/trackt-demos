@@ -94,7 +94,15 @@
       .pricing-cards { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; }
       footer { padding: 40px 20px; }
+      nav { position: relative; }
+      .hamburger { display: flex; }
+      #nav-menu.open { display: flex; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,10,30,0.98); padding: 12px 20px 16px; z-index: 200; border-top: 1px solid rgba(156,127,192,0.2); }
+      #nav-menu.open a { padding: 11px 0; font-size: 15px; border-bottom: 1px solid rgba(156,127,192,0.2); }
+      #nav-menu.open a:last-child { border-bottom: none; }
     }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: #9c7fc0; border-radius: 2px; }
   </style>
 </head>
 <body>
@@ -102,14 +110,15 @@
 
   <nav>
     <span class="logo">PULSE</span>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-menu">
       <a href="#classes">Classes</a>
       <a href="#pricing">Pricing</a>
       <a href="#">Schedule</a>
       <a href="#">Trainers</a>
     </div>
     <a href="#" class="nav-cta">Join Now — First Class Free</a>
-  </nav>
+  <button class="hamburger" onclick="document.getElementById('nav-menu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
   <section class="hero">
     <div class="hero-glow"></div>

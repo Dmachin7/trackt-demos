@@ -92,6 +92,13 @@
     /* Footer */
     footer { text-align: center; padding: 24px; font-size: 11px; color: #374151; border-top: 1px solid #1f2937; }
     footer a { color: #16b4d2; }
+
+    .table-outer { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-outer .table-wrap { min-width: 560px; }
+    @media (max-width: 600px) {
+      .nav-link { display: none; }
+      .page-header { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
@@ -218,7 +225,7 @@
   </div>
 
   <!-- Contacts table -->
-  <div class="table-wrap">
+  <div class="table-outer"><div class="table-wrap">
     <div class="table-header">
       <span class="table-title">Contacts</span>
       <button class="add-btn">+ Add Contact</button>
@@ -278,7 +285,8 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div><!-- /table-wrap -->
+  </div><!-- /table-outer -->
 
   <!-- Revenue chart -->
   <div class="chart-wrap">

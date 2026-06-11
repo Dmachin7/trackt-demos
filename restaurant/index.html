@@ -82,7 +82,15 @@
       .about-inner { grid-template-columns: 1fr; }
       .about-img { height: 200px; }
       .reserve { padding: 60px 20px; }
+      nav { position: relative; }
+      .hamburger { display: flex; }
+      #nav-menu.open { display: flex; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; background: rgba(26,15,0,0.98); padding: 12px 20px 16px; z-index: 200; border-top: 1px solid rgba(200,147,74,0.15); }
+      #nav-menu.open a { padding: 11px 0; font-size: 15px; border-bottom: 1px solid rgba(200,147,74,0.15); }
+      #nav-menu.open a:last-child { border-bottom: none; }
     }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: #c8934a; border-radius: 2px; }
   </style>
 </head>
 <body>
@@ -90,14 +98,15 @@
 
   <nav>
     <span class="logo">RIALTO</span>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-menu">
       <a href="#">Menu</a>
       <a href="#">Wine List</a>
       <a href="#">Events</a>
       <a href="#">About</a>
     </div>
     <a href="#reserve" class="nav-cta">Reserve a Table</a>
-  </nav>
+  <button class="hamburger" onclick="document.getElementById('nav-menu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
   <section class="hero">
     <p class="hero-badge">Est. 1994 · Tampa, Florida</p>

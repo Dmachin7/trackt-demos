@@ -95,6 +95,18 @@
     /* Footer */
     footer { text-align: center; padding: 24px; font-size: 11px; color: #374151; border-top: 1px solid #1f1b35; }
     footer a { color: #a78bfa; }
+
+    .cal-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .cal-scroll .calendar { min-width: 560px; }
+    @media (max-width: 600px) {
+      .nav-link { display: none; }
+      .stat-label { font-size: 11px; }
+      .time-label { font-size: 11px; }
+      .appt-title { font-size: 11px; }
+      .appt-time { font-size: 10px; }
+      .cal-th .day-name { font-size: 10px; }
+      .cal-th .day-num { font-size: 14px; }
+    }
   </style>
 </head>
 <body>
@@ -163,7 +175,7 @@
       </div>
 
       <!-- Calendar grid -->
-      <div class="calendar">
+      <div class="cal-scroll"><div class="calendar">
         <div class="cal-header">
           <div></div>
           <div class="cal-th"><div class="day-name">Mon</div><div class="day-num">9</div></div>

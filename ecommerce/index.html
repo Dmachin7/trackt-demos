@@ -96,7 +96,16 @@
       .trust { padding: 32px 20px; }
       .trust-inner { grid-template-columns: repeat(2, 1fr); }
       .footer-top { grid-template-columns: 1fr; }
+      nav { position: relative; }
+      .hamburger { display: flex; }
+      #nav-menu.open { display: flex; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; background: #fff; padding: 12px 20px 16px; z-index: 200; border-top: 1px solid rgba(0,0,0,0.07); }
+      #nav-menu.open a { padding: 11px 0; font-size: 15px; border-bottom: 1px solid rgba(0,0,0,0.07); }
+      #nav-menu.open a:last-child { border-bottom: none; }
+      .nav-right a:not(.cart-btn) { display: none; }
     }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: #111; border-radius: 2px; }
   </style>
 </head>
 <body>
@@ -106,7 +115,7 @@
 
   <nav>
     <span class="logo">NOVA</span>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-menu">
       <a href="#">New Arrivals</a>
       <a href="#">Women</a>
       <a href="#">Men</a>
@@ -118,7 +127,8 @@
       <a href="#">Account</a>
       <a href="#" class="cart-btn">Cart (0)</a>
     </div>
-  </nav>
+  <button class="hamburger" onclick="document.getElementById('nav-menu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
   <section class="hero">
     <div class="hero-content">

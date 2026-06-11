@@ -114,7 +114,16 @@
       .testimonials-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; }
       footer { padding: 40px 20px 24px; }
+      nav { position: relative; }
+      .hamburger { display: flex; }
+      #nav-menu.open { display: flex; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; background: #f5f3ee; padding: 12px 20px 16px; z-index: 200; border-top: 1px solid rgba(26,39,68,0.1); }
+      #nav-menu.open a { padding: 11px 0; font-size: 15px; border-bottom: 1px solid rgba(26,39,68,0.1); }
+      #nav-menu.open a:last-child { border-bottom: none; }
+      .practice-grid, .attorneys-grid, .testimonials-grid { grid-template-columns: 1fr; }
     }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: #1a2744; border-radius: 2px; }
   </style>
 </head>
 <body>
@@ -130,14 +139,15 @@
       <span class="logo">Hartman &amp; Associates</span>
       <span class="logo-sub">Attorneys at Law</span>
     </div>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-menu">
       <a href="#practice">Practice Areas</a>
       <a href="#attorneys">Attorneys</a>
       <a href="#">Resources</a>
       <a href="#">About</a>
     </div>
     <a href="#contact" class="nav-cta">Free Consultation</a>
-  </nav>
+  <button class="hamburger" onclick="document.getElementById('nav-menu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
   <section class="hero">
     <div class="hero-content">
