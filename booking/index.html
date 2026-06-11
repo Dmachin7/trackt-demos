@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Precision Auto Detail — Book Online</title>
+  <script>
+  (function(){
+    var s = localStorage.getItem('trackt-demo-theme');
+    var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+  })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -22,6 +29,27 @@
       --border: #e5e7eb;
       --border-g: #bbf7d0;
       --radius: 12px;
+      --c-gallery-bar: rgba(6,95,70,0.95);
+      --c-nav-bg: rgba(255,255,255,0.96);
+      --c-footer: #111827;
+      --c-svc-hover-shadow: rgba(6,95,70,0.08);
+    }
+    html.dark {
+      --ink: #f0f4f8;
+      --ink-2: #94a3b8;
+      --ink-3: #64748b;
+      --bg: #0d1117;
+      --white: #161d27;
+      --border: #1e2a38;
+      --border-g: #1a3a2a;
+      /* green/green-2/green-light/green-mid accent stays same */
+      --c-gallery-bar: rgba(4,66,49,0.97);
+      --c-nav-bg: rgba(22,29,39,0.97);
+      --c-footer: #0d1117;
+      --c-svc-hover-shadow: rgba(6,95,70,0.25);
+    }
+    .theme-transition, .theme-transition *, .theme-transition *::before, .theme-transition *::after {
+      transition: background-color 280ms ease, border-color 280ms ease, color 280ms ease !important;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -38,7 +66,7 @@
     /* ── GALLERY BAR ── */
     #gallery-bar {
       position: fixed; top: 0; left: 0; right: 0; height: 32px; z-index: 9999;
-      background: rgba(6,95,70,0.95); backdrop-filter: blur(10px);
+      background: var(--c-gallery-bar); backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 16px;
@@ -50,7 +78,7 @@
     /* ── HEADER ── */
     .site-nav {
       position: sticky; top: 32px; z-index: 50;
-      background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+      background: var(--c-nav-bg); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
@@ -131,7 +159,7 @@
       cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s;
       position: relative; overflow: hidden;
     }
-    .svc-card:hover { border-color: var(--green-mid); box-shadow: 0 4px 16px rgba(6,95,70,0.08); }
+    .svc-card:hover { border-color: var(--green-mid); box-shadow: 0 4px 16px var(--c-svc-hover-shadow); }
     .svc-card.selected { border-color: var(--green); box-shadow: 0 4px 20px rgba(6,95,70,0.15); }
     .svc-card.selected::before {
       content: '✓'; position: absolute; top: 12px; right: 14px;
@@ -305,7 +333,7 @@
     .reviews-rating strong { color: var(--green); font-size: 18px; font-weight: 900; }
 
     /* ── FOOTER ── */
-    .site-footer { background: var(--ink); padding: 40px 20px; text-align: center; }
+    .site-footer { background: var(--c-footer); padding: 40px 20px; text-align: center; }
     .site-footer p { color: rgba(255,255,255,0.35); font-size: 13px; }
     .site-footer a { color: #16b4d2; transition: filter 0.2s; }
     .site-footer a:hover { filter: brightness(1.2); }
@@ -315,6 +343,19 @@
       .steps-bar .step-text { display: none; }
       .hero-strip { padding: 32px 16px 36px; }
     }
+
+    /* ── THEME TOGGLE ── */
+    #theme-toggle {
+      width: 36px; height: 36px; border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--ink-3);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    #theme-toggle:hover { border-color: var(--green); color: var(--green); }
+    #theme-toggle svg { width: 18px; height: 18px; }
   </style>
 </head>
 <body>
@@ -335,6 +376,10 @@
         <span class="nav-brand-name">Precision Auto Detail</span>
         <span class="nav-brand-sub">Tampa, FL · (813) 555-0288</span>
       </div>
+      <button id="theme-toggle" aria-label="Toggle theme">
+        <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="icon-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
       <button class="nav-book-btn" onclick="scrollToBooking()">Book Online</button>
     </div>
   </nav>
@@ -774,5 +819,24 @@
     // Init
     initCal();
   </script>
+<script>
+(function(){
+  var html = document.documentElement;
+  var moon = document.getElementById('icon-moon');
+  var sun  = document.getElementById('icon-sun');
+  function sync(dark) {
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display  = dark ? '' : 'none';
+  }
+  sync(html.classList.contains('dark'));
+  document.getElementById('theme-toggle').addEventListener('click', function(){
+    html.classList.add('theme-transition');
+    var nowDark = html.classList.toggle('dark');
+    localStorage.setItem('trackt-demo-theme', nowDark ? 'dark' : 'light');
+    sync(nowDark);
+    setTimeout(function(){ html.classList.remove('theme-transition'); }, 320);
+  });
+})();
+</script>
 </body>
 </html>

@@ -5,32 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>PipelineHQ — Sales CRM Demo</title>
+  <script>
+  (function(){
+    var s = localStorage.getItem('trackt-demo-theme');
+    var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark');
+  })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
+      /* Light mode - clean white/light-gray app */
+      --bg: #f1f5f9;
+      --bg2: #ffffff;
+      --bg3: #f8fafc;
+      --bg4: #e2e8f0;
+      --teal: #16b4d2;
+      --teal-d: #0ea5c4;
+      --teal-dim: rgba(22,180,210,0.10);
+      --teal-border: rgba(22,180,210,0.25);
+      --green: #10b981;
+      --green-dim: rgba(16,185,129,0.10);
+      --amber: #fbbf24;
+      --amber-dim: rgba(251,191,36,0.10);
+      --red: #f87171;
+      --red-dim: rgba(248,113,113,0.08);
+      --ink: #1e293b;
+      --ink-2: #475569;
+      --ink-3: #94a3b8;
+      --border: #e2e8f0;
+      --border-2: #cbd5e1;
+      --radius: 10px;
+      --sidebar: 220px;
+      --c-gallery-bar: rgba(241,245,249,0.95);
+      --c-row-hover: rgba(22,180,210,0.04);
+      --c-card-shadow: rgba(0,0,0,0.06);
+    }
+    html.dark {
       --bg: #0a0f1a;
       --bg2: #0e1420;
       --bg3: #111827;
       --bg4: #1a2332;
-      --teal: #16b4d2;
-      --teal-d: #0ea5c4;
       --teal-dim: rgba(22,180,210,0.12);
-      --teal-border: rgba(22,180,210,0.25);
-      --green: #10b981;
       --green-dim: rgba(16,185,129,0.12);
-      --amber: #fbbf24;
       --amber-dim: rgba(251,191,36,0.12);
-      --red: #f87171;
       --red-dim: rgba(248,113,113,0.1);
       --ink: #e2e8f0;
       --ink-2: #94a3b8;
       --ink-3: #475569;
       --border: #1f2937;
       --border-2: #2d3748;
-      --radius: 10px;
-      --sidebar: 220px;
+      --c-gallery-bar: rgba(10,15,26,0.95);
+      --c-row-hover: rgba(255,255,255,0.02);
+      --c-card-shadow: rgba(0,0,0,0.2);
+    }
+    .theme-transition, .theme-transition *, .theme-transition *::before, .theme-transition *::after {
+      transition: background-color 280ms ease, border-color 280ms ease, color 280ms ease !important;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-x: hidden; }
@@ -46,7 +78,7 @@
     /* ── GALLERY BAR ── */
     #gallery-bar {
       position: fixed; top: 0; left: 0; right: 0; height: 32px; z-index: 9999;
-      background: rgba(10,15,26,0.95); backdrop-filter: blur(10px);
+      background: var(--c-gallery-bar); backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--teal-border);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 16px;
@@ -225,7 +257,7 @@
     thead th .sort-indicator { margin-left: 4px; opacity: 0.5; }
     thead th.sorted { color: var(--teal); }
     tbody tr { border-top: 1px solid var(--border); transition: background 0.1s; cursor: pointer; }
-    tbody tr:hover { background: rgba(255,255,255,0.02); }
+    tbody tr:hover { background: var(--c-row-hover); }
     td { padding: 11px 14px; font-size: 12px; color: var(--ink-2); white-space: nowrap; }
     .contact-cell { display: flex; align-items: center; gap: 10px; }
     .c-avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; }
@@ -259,7 +291,7 @@
       cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s;
       draggable: true;
     }
-    .deal-card:hover { border-color: var(--teal-border); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .deal-card:hover { border-color: var(--teal-border); box-shadow: 0 2px 8px var(--c-card-shadow); }
     .deal-card.dragging { opacity: 0.4; }
     .deal-company { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
     .deal-contact { font-size: 11px; color: var(--ink-3); margin-bottom: 8px; }
@@ -360,6 +392,19 @@
     .demo-footer { border-top: 1px solid var(--border); padding: 16px 20px; text-align: center; background: var(--bg2); }
     .demo-footer p { color: var(--ink-3); font-size: 11px; }
     .demo-footer a { color: var(--teal); }
+
+    /* ── THEME TOGGLE ── */
+    #theme-toggle {
+      width: 36px; height: 36px; border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--ink-3);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    #theme-toggle:hover { border-color: var(--teal); color: var(--teal); }
+    #theme-toggle svg { width: 18px; height: 18px; }
   </style>
 </head>
 <body>
@@ -421,6 +466,10 @@
           <button class="topbar-btn" onclick="openNewDeal()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             New Deal
+          </button>
+          <button id="theme-toggle" aria-label="Toggle theme">
+            <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg id="icon-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           </button>
           <div class="topbar-avatar">DT</div>
         </div>
@@ -893,5 +942,24 @@
     buildChart();
     renderContacts();
   </script>
+<script>
+(function(){
+  var html = document.documentElement;
+  var moon = document.getElementById('icon-moon');
+  var sun  = document.getElementById('icon-sun');
+  function sync(dark) {
+    moon.style.display = dark ? 'none' : '';
+    sun.style.display  = dark ? '' : 'none';
+  }
+  sync(html.classList.contains('dark'));
+  document.getElementById('theme-toggle').addEventListener('click', function(){
+    html.classList.add('theme-transition');
+    var nowDark = html.classList.toggle('dark');
+    localStorage.setItem('trackt-demo-theme', nowDark ? 'dark' : 'light');
+    sync(nowDark);
+    setTimeout(function(){ html.classList.remove('theme-transition'); }, 320);
+  });
+})();
+</script>
 </body>
 </html>
