@@ -292,6 +292,112 @@
     #gallery-bar a:hover { color: #5cd3e8; }
     #gallery-bar .label { color: rgba(255,255,255,0.25); font-size: 11px; letter-spacing: 0.3px; }
     body { padding-top: 32px; }
+
+    /* ── MOBILE STICKY CTA BAR ── */
+    #mobile-cta-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+      background: #0a0a0a;
+      border-top: 1px solid rgba(245,158,11,0.3);
+      padding: 10px 16px;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+      gap: 10px;
+    }
+    @media (max-width: 1023px) { #mobile-cta-bar { display: flex; } }
+    .mcta-call {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--amber); color: #000;
+      font-weight: 800; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 13px 12px; border-radius: 4px; min-height: 48px;
+      transition: background 0.2s;
+    }
+    .mcta-call:hover { background: var(--amber-light); }
+    .mcta-call svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .mcta-tow {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+      border: 2px solid rgba(245,158,11,0.5); color: var(--amber);
+      font-weight: 800; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 13px 12px; border-radius: 4px; min-height: 48px; cursor: pointer;
+      background: transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .mcta-tow:hover { background: rgba(245,158,11,0.08); border-color: var(--amber); }
+    .mcta-tow svg { width: 16px; height: 16px; flex-shrink: 0; }
+    @media (max-width: 1023px) { body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); } }
+
+    /* ── 3-STEP DISPATCH WIZARD ── */
+    .wizard { }
+    .wizard-steps {
+      display: flex; align-items: center; gap: 0; margin-bottom: 28px;
+    }
+    .wizard-step {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .step-circle {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; flex-shrink: 0;
+      border: 2px solid #374151; color: #6b7280;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .step-circle.active { border-color: var(--amber); background: var(--amber); color: #000; }
+    .step-circle.done { border-color: rgba(34,197,94,0.5); background: rgba(34,197,94,0.15); color: #22c55e; }
+    .step-label { font-size: 11px; font-weight: 600; color: #6b7280; white-space: nowrap; }
+    .step-label.active { color: var(--amber); }
+    .step-label.done { color: #4ade80; }
+    .step-connector { flex: 1; height: 2px; background: #1f2937; margin: 0 8px; min-width: 20px; }
+    .step-connector.done { background: rgba(34,197,94,0.4); }
+
+    .wizard-pane { display: none; }
+    .wizard-pane.active { display: block; }
+
+    .wizard-pane h3 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .wizard-pane .pane-sub { color: #9ca3af; font-size: 13px; margin-bottom: 20px; }
+
+    .situation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+    .sit-btn {
+      display: flex; align-items: center; gap: 10px;
+      background: #1a1a1a; border: 2px solid #1f2937;
+      border-radius: 6px; padding: 12px 14px;
+      color: #9ca3af; font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      text-align: left;
+    }
+    .sit-btn:hover { border-color: rgba(245,158,11,0.5); background: rgba(245,158,11,0.04); color: #d1d5db; }
+    .sit-btn.selected { border-color: var(--amber); background: rgba(245,158,11,0.08); color: var(--amber-light); }
+    .sit-btn span { font-size: 18px; flex-shrink: 0; }
+
+    .dispatch-screen { text-align: center; padding: 32px 24px; }
+    .dispatch-pulse {
+      width: 72px; height: 72px;
+      background: rgba(34,197,94,0.12); border: 2px solid rgba(34,197,94,0.4);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; animation: dpulse 2s ease-in-out infinite;
+    }
+    @keyframes dpulse { 0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.3); } 50% { box-shadow: 0 0 0 16px rgba(34,197,94,0); } }
+    .dispatch-pulse svg { width: 32px; height: 32px; color: #22c55e; }
+    .dispatch-screen h3 { color: #fff; font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .dispatch-eta { color: var(--amber); font-size: 28px; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .dispatch-sub { color: #9ca3af; font-size: 13px; margin-bottom: 20px; }
+    .driver-card {
+      background: #111827; border: 1px solid #1f2937;
+      border-radius: 8px; padding: 16px; display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px; text-align: left;
+    }
+    .driver-avatar {
+      width: 44px; height: 44px; background: rgba(245,158,11,0.2);
+      border: 2px solid rgba(245,158,11,0.3); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber); font-size: 14px; font-weight: 800; flex-shrink: 0;
+    }
+    .driver-name { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .driver-meta { color: #9ca3af; font-size: 12px; }
+    .demo-dead-end {
+      background: rgba(22,180,210,0.06); border: 1px solid rgba(22,180,210,0.2);
+      border-radius: 6px; padding: 14px 16px;
+      color: #9ca3af; font-size: 12px; line-height: 1.6;
+    }
+    .demo-dead-end strong { color: #16b4d2; }
   </style>
 </head>
 <body>
@@ -303,6 +409,18 @@
       Back to Gallery
     </a>
     <span class="label">Trackt Tech Demo</span>
+  </div>
+
+  <!-- Mobile sticky CTA bar -->
+  <div id="mobile-cta-bar">
+    <a href="tel:+18135550147" class="mcta-call">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.88 12 19.79 19.79 0 0 1 1.8 3.39 2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.99 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call Now
+    </a>
+    <button class="mcta-tow" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      Request Tow
+    </button>
   </div>
 
   <!-- ── NAVBAR ── -->
@@ -765,60 +883,109 @@
       <div class="section-head">
         <p class="section-label">Get Help Now</p>
         <h2 class="section-title">Request a Tow</h2>
-        <p class="section-sub">Fill out the form and we'll get back to you fast — or call us directly for immediate dispatch.</p>
+        <p class="section-sub">Tell us where you are and what's happening — we'll dispatch the closest driver immediately.</p>
         <div class="section-bar"></div>
       </div>
       <div class="contact-grid">
         <div>
-          <div class="contact-form" id="contact-form-wrap">
-            <form id="tow-form" novalidate>
+          <div class="contact-form wizard" id="tow-wizard">
+
+            <!-- Step indicator -->
+            <div class="wizard-steps" id="wizard-steps">
+              <div class="wizard-step">
+                <div class="step-circle active" id="sc1">1</div>
+                <span class="step-label active" id="sl1">Location</span>
+              </div>
+              <div class="step-connector" id="conn1"></div>
+              <div class="wizard-step">
+                <div class="step-circle" id="sc2">2</div>
+                <span class="step-label" id="sl2">Situation</span>
+              </div>
+              <div class="step-connector" id="conn2"></div>
+              <div class="wizard-step">
+                <div class="step-circle" id="sc3">3</div>
+                <span class="step-label" id="sl3">Dispatched</span>
+              </div>
+            </div>
+
+            <!-- Step 1: Location + Vehicle -->
+            <div class="wizard-pane active" id="pane1">
+              <h3>Where are you right now?</h3>
+              <p class="pane-sub">Enter your location and vehicle so we can send the right truck.</p>
+              <div class="form-group">
+                <label for="w-location">Your Location *</label>
+                <input type="text" id="w-location" placeholder="Street address, intersection, or landmark" />
+              </div>
               <div class="form-row">
                 <div class="form-group" style="margin-bottom:0;">
-                  <label for="f-name">Full Name *</label>
-                  <input type="text" id="f-name" name="name" required placeholder="John Smith" />
-                </div>
-                <div class="form-group" style="margin-bottom:0;">
-                  <label for="f-phone">Phone Number *</label>
-                  <input type="tel" id="f-phone" name="phone" required placeholder="(813) 555-0000" />
-                </div>
-              </div>
-              <div class="form-group" style="margin-top:20px;">
-                <label for="f-email">Email Address</label>
-                <input type="email" id="f-email" name="email" placeholder="john@email.com" />
-              </div>
-              <div class="form-row">
-                <div class="form-group" style="margin-bottom:0;">
-                  <label for="f-vehicle">Vehicle Type</label>
-                  <input type="text" id="f-vehicle" name="vehicleType" placeholder="e.g. 2020 Honda Accord" />
-                </div>
-                <div class="form-group" style="margin-bottom:0;">
-                  <label for="f-service">Service Needed</label>
-                  <select id="f-service" name="service">
-                    <option value="">Select a service...</option>
-                    <option>Light Duty Towing</option>
-                    <option>Roadside Assistance</option>
-                    <option>Medium Duty Recovery</option>
-                    <option>Accident Recovery</option>
-                    <option>Private Property Impound</option>
-                    <option>Winch Out Service</option>
-                    <option>Other</option>
+                  <label for="w-vtype">Vehicle Type *</label>
+                  <select id="w-vtype">
+                    <option value="">Select type...</option>
+                    <option>Car / Sedan</option>
+                    <option>SUV / Crossover</option>
+                    <option>Pickup Truck</option>
+                    <option>Van / Minivan</option>
+                    <option>Motorcycle</option>
+                    <option>Box Truck / Commercial</option>
+                    <option>RV / Trailer</option>
                   </select>
                 </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label for="w-vdesc">Vehicle Description</label>
+                  <input type="text" id="w-vdesc" placeholder="e.g. 2019 Toyota RAV4, silver" />
+                </div>
               </div>
-              <div class="form-group" style="margin-top:20px;">
-                <label for="f-message">Additional Details</label>
-                <textarea id="f-message" name="message" rows="4" placeholder="Describe your situation — location, vehicle condition, anything helpful..."></textarea>
-              </div>
-              <button type="submit" class="submit-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                Submit Request
+              <button type="button" class="submit-btn" id="step1-next" onclick="wizardNext(1)" style="margin-top:24px;">
+                Next — Choose Situation
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </button>
-            </form>
-            <div class="form-success" id="form-success">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <h3>Request Received!</h3>
-              <p>We'll contact you shortly. For urgent help, call us now at <a href="tel:+18135550147">(813) 555-0147</a>.</p>
             </div>
+
+            <!-- Step 2: Situation type -->
+            <div class="wizard-pane" id="pane2">
+              <h3>What's the situation?</h3>
+              <p class="pane-sub">Select what best describes your problem so we send the right equipment.</p>
+              <div class="situation-grid" id="sit-grid">
+                <button class="sit-btn" onclick="selectSit(this)"><span>🔧</span> Won't Start</button>
+                <button class="sit-btn" onclick="selectSit(this)"><span>🛞</span> Flat Tire</button>
+                <button class="sit-btn" onclick="selectSit(this)"><span>🚗</span> Need a Tow</button>
+                <button class="sit-btn" onclick="selectSit(this)"><span>🔑</span> Locked Out</button>
+                <button class="sit-btn" onclick="selectSit(this)"><span>⛽</span> Out of Gas</button>
+                <button class="sit-btn" onclick="selectSit(this)"><span>💥</span> Accident / Collision</button>
+                <button class="sit-btn" onclick="selectSit(this)"><span>🏜️</span> Stuck / Need Winch Out</button>
+                <button class="sit-btn" onclick="selectSit(this)"><span>❓</span> Other</button>
+              </div>
+              <div style="display:flex;gap:10px;">
+                <button type="button" class="btn-outline" onclick="wizardBack(2)" style="flex:0 0 auto;font-size:13px;padding:12px 18px;">← Back</button>
+                <button type="button" class="submit-btn" id="step2-next" onclick="wizardNext(2)" style="flex:1;opacity:0.4;pointer-events:none;" disabled>
+                  Dispatch Driver
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Confirmed dispatch -->
+            <div class="wizard-pane" id="pane3">
+              <div class="dispatch-screen">
+                <div class="dispatch-pulse">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3>Driver Dispatched!</h3>
+                <div class="dispatch-eta">ETA 28 min</div>
+                <p class="dispatch-sub">Your driver is on the way. You'll receive a text confirmation shortly.</p>
+                <div class="driver-card">
+                  <div class="driver-avatar">MR</div>
+                  <div>
+                    <div class="driver-name">Mike R. — Ridgeline Driver</div>
+                    <div class="driver-meta">⭐ 4.97 · 340 tows · Currently 4.2 mi away</div>
+                  </div>
+                </div>
+                <div class="demo-dead-end">
+                  <strong>Demo note:</strong> This is a demo — in your real version, the customer receives a live SMS with the driver's name, photo, and a real-time tracking link.
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
         <div class="contact-info">
@@ -974,12 +1141,57 @@
       });
     });
 
-    // Contact form
-    document.getElementById('tow-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      document.getElementById('tow-form').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    });
+    // 3-step dispatch wizard
+    function wizardNext(step) {
+      if (step === 1) {
+        const loc = document.getElementById('w-location').value.trim();
+        const vtype = document.getElementById('w-vtype').value;
+        if (!loc || !vtype) {
+          document.getElementById('w-location').style.borderColor = loc ? '' : '#ef4444';
+          document.getElementById('w-vtype').style.borderColor = vtype ? '' : '#ef4444';
+          return;
+        }
+        document.getElementById('w-location').style.borderColor = '';
+        document.getElementById('w-vtype').style.borderColor = '';
+        goToPane(2);
+      } else if (step === 2) {
+        goToPane(3);
+      }
+    }
+
+    function wizardBack(step) {
+      goToPane(step - 1);
+    }
+
+    function goToPane(n) {
+      [1,2,3].forEach(i => {
+        document.getElementById('pane' + i).classList.toggle('active', i === n);
+        const sc = document.getElementById('sc' + i);
+        const sl = document.getElementById('sl' + i);
+        if (i < n) {
+          sc.classList.add('done'); sc.classList.remove('active');
+          sc.textContent = '✓'; sl.classList.add('done'); sl.classList.remove('active');
+        } else if (i === n) {
+          sc.classList.add('active'); sc.classList.remove('done');
+          sc.textContent = i; sl.classList.add('active'); sl.classList.remove('done');
+        } else {
+          sc.classList.remove('active','done'); sc.textContent = i;
+          sl.classList.remove('active','done');
+        }
+      });
+      [1,2].forEach(i => {
+        const c = document.getElementById('conn' + i);
+        if (c) c.classList.toggle('done', n > i);
+      });
+    }
+
+    function selectSit(btn) {
+      document.querySelectorAll('.sit-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const nextBtn = document.getElementById('step2-next');
+      nextBtn.style.opacity = '1'; nextBtn.style.pointerEvents = '';
+      nextBtn.disabled = false;
+    }
   </script>
 </body>
 </html>

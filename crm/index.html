@@ -4,333 +4,894 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Pipeline CRM — Demo</title>
+  <title>PipelineHQ — Sales CRM Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --bg: #0a0f1a;
+      --bg2: #0e1420;
+      --bg3: #111827;
+      --bg4: #1a2332;
+      --teal: #16b4d2;
+      --teal-d: #0ea5c4;
+      --teal-dim: rgba(22,180,210,0.12);
+      --teal-border: rgba(22,180,210,0.25);
+      --green: #10b981;
+      --green-dim: rgba(16,185,129,0.12);
+      --amber: #fbbf24;
+      --amber-dim: rgba(251,191,36,0.12);
+      --red: #f87171;
+      --red-dim: rgba(248,113,113,0.1);
+      --ink: #e2e8f0;
+      --ink-2: #94a3b8;
+      --ink-3: #475569;
+      --border: #1f2937;
+      --border-2: #2d3748;
+      --radius: 10px;
+      --sidebar: 220px;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0a0f1a; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh;  padding-top: 32px; }
+    html { overflow-x: hidden; }
+    body {
+      background: var(--bg); color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+      padding-top: 32px;
+    }
     a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
 
-    /* Nav */
-    nav { position: sticky; top: 32px; z-index: 50; background: rgba(10,15,26,0.92); border-bottom: 1px solid rgba(22,180,210,0.15); backdrop-filter: blur(12px); padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-brand { font-size: 15px; font-weight: 800; color: #16b4d2; letter-spacing: 1px; }
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
-    .nav-btn { background: #16b4d2; color: #0a0f1a; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 6px; cursor: pointer; border: none; }
-    .nav-link { font-size: 12px; color: #64748b; cursor: pointer; }
-    .nav-link:hover { color: #94a3b8; }
+    /* ── GALLERY BAR ── */
+    #gallery-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 32px; z-index: 9999;
+      background: rgba(10,15,26,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--teal-border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px;
+    }
+    #gallery-bar a { display: inline-flex; align-items: center; gap: 5px; color: var(--teal); font-size: 11px; font-weight: 600; transition: color 0.2s; }
+    #gallery-bar a:hover { color: #5cd3e8; }
+    #gallery-bar .label { color: var(--ink-3); font-size: 11px; }
 
-    /* Layout */
-    .page { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+    /* ── APP SHELL ── */
+    .app-shell {
+      display: flex; min-height: calc(100vh - 32px); position: relative;
+    }
 
-    /* Header row */
-    .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-    .page-title { font-size: 20px; font-weight: 700; color: #f0f4f8; }
-    .page-subtitle { font-size: 13px; color: #64748b; margin-top: 2px; }
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar); flex-shrink: 0;
+      background: var(--bg2); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      position: sticky; top: 32px; height: calc(100vh - 32px);
+      overflow-y: auto;
+    }
+    @media (max-width: 768px) { .sidebar { display: none; } }
+    .sidebar-logo {
+      padding: 18px 16px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-logo-name { font-size: 15px; font-weight: 900; color: var(--teal); letter-spacing: -0.01em; }
+    .sidebar-logo-sub { font-size: 10px; color: var(--ink-3); letter-spacing: 0.5px; margin-top: 1px; }
+    .sidebar-nav { padding: 12px 8px; flex: 1; }
+    .nav-section-label { font-size: 9px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.15em; text-transform: uppercase; padding: 12px 8px 6px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 10px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; color: var(--ink-2);
+      cursor: pointer; margin-bottom: 2px;
+      transition: background 0.15s, color 0.15s;
+      border: none; background: none; width: 100%; text-align: left;
+    }
+    .nav-item:hover { background: var(--bg3); color: var(--ink); }
+    .nav-item.active { background: var(--teal-dim); color: var(--teal); }
+    .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .nav-badge { margin-left: auto; background: var(--teal-dim); color: var(--teal); font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; }
+    .sidebar-footer {
+      padding: 12px 16px; border-top: 1px solid var(--border);
+    }
+    .user-row { display: flex; align-items: center; gap: 10px; }
+    .user-avatar { width: 32px; height: 32px; background: var(--teal-dim); border: 1px solid var(--teal-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--teal); font-size: 11px; font-weight: 800; flex-shrink: 0; }
+    .user-name { font-size: 12px; font-weight: 700; color: var(--ink); }
+    .user-role { font-size: 10px; color: var(--ink-3); }
 
-    /* KPI tiles */
-    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
-    @media (max-width: 700px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
-    .kpi { background: #111827; border: 1px solid #1f2937; border-radius: 10px; padding: 16px 18px; }
-    .kpi-label { font-size: 11px; color: #6b7280; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
-    .kpi-value { font-size: 24px; font-weight: 800; color: #f0f4f8; }
-    .kpi-value.cyan { color: #16b4d2; }
-    .kpi-value.green { color: #10b981; }
-    .kpi-delta { font-size: 11px; color: #10b981; margin-top: 4px; }
-    .kpi-delta.neutral { color: #6b7280; }
+    /* ── MAIN ── */
+    .main-area { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .topbar {
+      height: 52px; background: var(--bg2); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 20px;
+      gap: 12px; flex-shrink: 0;
+      position: sticky; top: 32px; z-index: 40;
+    }
+    .topbar-brand { display: none; }
+    @media (max-width: 768px) {
+      .topbar-brand { display: flex; flex-direction: column; line-height: 1; }
+      .topbar-brand-name { font-size: 13px; font-weight: 900; color: var(--teal); }
+    }
+    .topbar-title { font-size: 15px; font-weight: 800; color: var(--ink); }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .topbar-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--teal-dim); border: 1px solid var(--teal-border);
+      color: var(--teal); font-size: 12px; font-weight: 700;
+      padding: 7px 12px; border-radius: 7px;
+      transition: background 0.15s;
+    }
+    .topbar-btn:hover { background: rgba(22,180,210,0.2); }
+    .topbar-btn svg { width: 14px; height: 14px; }
+    .topbar-avatar { width: 32px; height: 32px; background: var(--teal-dim); border: 1px solid var(--teal-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--teal); font-size: 11px; font-weight: 800; }
 
-    /* Kanban */
-    .section-title { font-size: 14px; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 14px; }
-    .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 32px; }
-    @media (max-width: 700px) { .kanban { grid-template-columns: repeat(2, 1fr); } }
-    .kanban-col { background: #0e1420; border: 1px solid #1f2937; border-radius: 10px; padding: 14px; }
-    .col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .col-name { font-size: 11px; font-weight: 700; color: #6b7280; letter-spacing: 1px; text-transform: uppercase; }
-    .col-count { background: #1f2937; color: #94a3b8; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
-    .deal-card { background: #111827; border: 1px solid #1f2937; border-radius: 7px; padding: 10px 11px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s; }
-    .deal-card:hover { border-color: rgba(22,180,210,0.4); }
-    .deal-name { font-size: 12px; font-weight: 600; color: #e2e8f0; margin-bottom: 4px; }
-    .deal-meta { font-size: 10px; color: #6b7280; }
-    .deal-value { font-size: 11px; font-weight: 700; color: #16b4d2; margin-top: 5px; }
-    .deal-value.green { color: #10b981; }
-    .col-prospect .deal-card:hover { border-color: rgba(148,163,184,0.4); }
-    .col-closed .deal-card { border-color: rgba(16,185,129,0.2); }
+    /* Mobile nav */
+    .mobile-nav {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
+    }
+    @media (max-width: 768px) { .mobile-nav { display: flex; } }
+    .mnav-item {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 6px 4px; cursor: pointer;
+      font-size: 9px; font-weight: 600; color: var(--ink-3);
+      border: none; background: none;
+      transition: color 0.15s;
+    }
+    .mnav-item.active { color: var(--teal); }
+    .mnav-item svg { width: 20px; height: 20px; }
+    @media (max-width: 768px) { body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); } }
 
-    /* Contacts table */
-    .table-wrap { background: #0e1420; border: 1px solid #1f2937; border-radius: 10px; overflow: hidden; margin-bottom: 32px; }
-    .table-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid #1f2937; }
-    .table-title { font-size: 14px; font-weight: 700; color: #f0f4f8; }
-    .add-btn { background: rgba(22,180,210,0.12); border: 1px solid rgba(22,180,210,0.3); color: #16b4d2; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
-    table { width: 100%; border-collapse: collapse; }
-    th { background: #0a0f1a; font-size: 10px; font-weight: 700; color: #4b5563; letter-spacing: 0.5px; text-transform: uppercase; padding: 10px 18px; text-align: left; }
-    td { padding: 12px 18px; border-top: 1px solid #1a2030; font-size: 12px; color: #94a3b8; }
-    tr:hover td { background: rgba(255,255,255,0.02); }
-    .contact-name { display: flex; align-items: center; gap: 10px; }
-    .avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; }
-    .av-c { background: rgba(22,180,210,0.2); color: #16b4d2; }
-    .av-g { background: rgba(16,185,129,0.2); color: #10b981; }
-    .av-p { background: rgba(167,139,250,0.2); color: #a78bfa; }
-    .av-o { background: rgba(249,115,22,0.2); color: #f97316; }
-    .av-b { background: rgba(96,165,250,0.2); color: #60a5fa; }
-    .av-r { background: rgba(244,63,94,0.2); color: #f43f5e; }
-    .contact-full { font-size: 12px; font-weight: 600; color: #e2e8f0; }
-    .status-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
-    .sb-active { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.2); }
-    .sb-prospect { background: rgba(22,180,210,0.12); color: #16b4d2; border: 1px solid rgba(22,180,210,0.2); }
-    .sb-proposal { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
-    .sb-closed { background: rgba(107,114,128,0.12); color: #6b7280; border: 1px solid rgba(107,114,128,0.2); }
+    /* ── VIEWS ── */
+    .view { display: none; padding: 20px; flex: 1; }
+    .view.active { display: block; }
+
+    /* ── DASHBOARD ── */
+    .kpi-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    @media (min-width: 900px) { .kpi-row { grid-template-columns: repeat(4, 1fr); } }
+    .kpi-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 18px;
+    }
+    .kpi-label { font-size: 10px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .kpi-value { font-size: 24px; font-weight: 900; color: var(--ink); letter-spacing: -0.02em; }
+    .kpi-value.teal { color: var(--teal); }
+    .kpi-value.green { color: var(--green); }
+    .kpi-delta { display: flex; align-items: center; gap: 4px; font-size: 11px; margin-top: 5px; }
+    .kpi-delta.up { color: var(--green); }
+    .kpi-delta.neutral { color: var(--ink-3); }
 
     /* Chart */
-    .chart-wrap { background: #0e1420; border: 1px solid #1f2937; border-radius: 10px; padding: 20px 20px 16px; }
-    .chart-title { font-size: 14px; font-weight: 700; color: #f0f4f8; margin-bottom: 4px; }
-    .chart-sub { font-size: 11px; color: #6b7280; margin-bottom: 20px; }
-    .bars { display: flex; align-items: flex-end; gap: 12px; height: 100px; }
-    .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .bar { width: 100%; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, #16b4d2 0%, rgba(22,180,210,0.5) 100%); transition: opacity 0.2s; cursor: pointer; }
-    .bar:hover { opacity: 0.8; }
-    .bar-label { font-size: 9px; color: #4b5563; font-weight: 600; text-transform: uppercase; }
-    .bar-val { font-size: 9px; color: #94a3b8; font-weight: 600; }
+    .dash-row { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
+    @media (min-width: 900px) { .dash-row { grid-template-columns: 2fr 1fr; } }
+    .dash-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); }
+    .dash-card-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 0; margin-bottom: 4px; }
+    .dash-card-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .dash-card-sub { font-size: 11px; color: var(--ink-3); }
+    .chart-area { padding: 12px 16px 16px; }
+    .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 100px; }
+    .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .bar-outer { width: 100%; background: var(--bg4); border-radius: 4px 4px 0 0; position: relative; flex: 1; display: flex; align-items: flex-end; }
+    .bar-fill { width: 100%; background: var(--teal); border-radius: 4px 4px 0 0; opacity: 0.85; transition: height 0.5s ease; min-height: 4px; }
+    .bar-label { font-size: 9px; color: var(--ink-3); font-weight: 600; }
 
-    /* Footer */
-    footer { text-align: center; padding: 24px; font-size: 11px; color: #374151; border-top: 1px solid #1f2937; }
-    footer a { color: #16b4d2; }
+    /* Activity feed */
+    .activity-list { padding: 0 16px 16px; }
+    .activity-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .dot-teal { background: var(--teal); }
+    .dot-green { background: var(--green); }
+    .dot-amber { background: var(--amber); }
+    .activity-body { flex: 1; min-width: 0; }
+    .activity-text { font-size: 12px; color: var(--ink); line-height: 1.4; }
+    .activity-text strong { color: var(--teal); }
+    .activity-time { font-size: 10px; color: var(--ink-3); margin-top: 2px; }
 
-    .table-outer { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .table-outer .table-wrap { min-width: 560px; }
-    @media (max-width: 600px) {
-      .nav-link { display: none; }
-      .page-header { flex-direction: column; align-items: flex-start; }
+    /* Funnel */
+    .funnel-list { padding: 0 16px 16px; }
+    .funnel-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .funnel-stage { font-size: 11px; font-weight: 600; color: var(--ink-2); width: 72px; flex-shrink: 0; }
+    .funnel-bar-bg { flex: 1; background: var(--bg4); border-radius: 4px; height: 8px; overflow: hidden; }
+    .funnel-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+    .funnel-count { font-size: 11px; font-weight: 700; color: var(--ink-2); width: 28px; text-align: right; }
+    .funnel-val { font-size: 11px; color: var(--ink-3); width: 54px; text-align: right; }
+
+    /* ── CONTACTS ── */
+    .contacts-toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .search-input-wrap { position: relative; flex: 1; min-width: 180px; }
+    .search-input-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(--ink-3); pointer-events: none; }
+    .search-input {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--ink); font-size: 13px; font-family: inherit;
+      padding: 9px 12px 9px 32px; outline: none;
+      transition: border-color 0.2s;
     }
+    .search-input:focus { border-color: var(--teal); }
+    .search-input::placeholder { color: var(--ink-3); }
+    .filter-select {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--ink-2); font-size: 12px; font-family: inherit;
+      padding: 9px 12px; outline: none; cursor: pointer;
+    }
+    .contacts-table-wrap { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 560px; }
+    thead th {
+      background: var(--bg2); font-size: 10px; font-weight: 700;
+      color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 11px 14px; text-align: left; white-space: nowrap;
+      cursor: pointer; user-select: none;
+    }
+    thead th:hover { color: var(--ink-2); }
+    thead th .sort-indicator { margin-left: 4px; opacity: 0.5; }
+    thead th.sorted { color: var(--teal); }
+    tbody tr { border-top: 1px solid var(--border); transition: background 0.1s; cursor: pointer; }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+    td { padding: 11px 14px; font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+    .contact-cell { display: flex; align-items: center; gap: 10px; }
+    .c-avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; }
+    .c-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .c-company { font-size: 11px; color: var(--ink-3); }
+    .status-pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+    .sp-lead { background: var(--teal-dim); color: var(--teal); }
+    .sp-qualified { background: rgba(167,139,250,0.12); color: #a78bfa; }
+    .sp-proposal { background: var(--amber-dim); color: var(--amber); }
+    .sp-won { background: var(--green-dim); color: var(--green); }
+    .sp-lost { background: var(--red-dim); color: var(--red); }
+    .contacts-count { font-size: 12px; color: var(--ink-3); margin-top: 10px; }
+
+    /* ── PIPELINE / KANBAN ── */
+    .kanban-wrap { overflow-x: auto; padding-bottom: 16px; }
+    .kanban { display: grid; grid-template-columns: repeat(4, 280px); gap: 14px; min-width: 0; }
+    @media (min-width: 1200px) { .kanban { grid-template-columns: repeat(4, 1fr); } }
+    .k-col {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px;
+      min-height: 300px;
+    }
+    .k-col.drag-over { border-color: var(--teal); background: rgba(22,180,210,0.04); }
+    .k-col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .k-col-name { font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; }
+    .k-col-count { background: var(--bg4); color: var(--ink-2); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+    .k-col-total { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+    .deal-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px; margin-bottom: 8px;
+      cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s;
+      draggable: true;
+    }
+    .deal-card:hover { border-color: var(--teal-border); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .deal-card.dragging { opacity: 0.4; }
+    .deal-company { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+    .deal-contact { font-size: 11px; color: var(--ink-3); margin-bottom: 8px; }
+    .deal-footer { display: flex; align-items: center; justify-content: space-between; }
+    .deal-value { font-size: 12px; font-weight: 800; color: var(--teal); }
+    .k-col:last-child .deal-value { color: var(--green); }
+    .deal-age { font-size: 10px; color: var(--ink-3); }
+    .deal-move-btn {
+      display: none; font-size: 10px; font-weight: 700;
+      background: var(--teal-dim); border: 1px solid var(--teal-border);
+      color: var(--teal); padding: 3px 8px; border-radius: 5px; margin-top: 8px;
+      transition: background 0.15s;
+    }
+    .deal-move-btn:hover { background: rgba(22,180,210,0.2); }
+    @media (max-width: 768px) { .deal-move-btn { display: inline-flex; } }
+
+    /* ── DEAL DETAIL PANEL ── */
+    .panel-overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(2px);
+    }
+    .panel-overlay.open { display: block; }
+    .detail-panel {
+      position: fixed; top: 32px; right: 0; bottom: 0; z-index: 101;
+      width: min(440px, 100vw);
+      background: var(--bg2); border-left: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+    .detail-panel.open { transform: translateX(0); }
+    .panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 18px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .panel-close {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border); border-radius: 7px; background: none;
+      color: var(--ink-2); cursor: pointer; transition: background 0.15s;
+    }
+    .panel-close:hover { background: var(--bg4); }
+    .panel-close svg { width: 16px; height: 16px; }
+    .panel-body { flex: 1; overflow-y: auto; padding: 18px; }
+    .panel-company { font-size: 20px; font-weight: 900; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 4px; }
+    .panel-stage-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; margin-bottom: 16px; }
+    .panel-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+    .pmeta-item { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+    .pmeta-label { font-size: 9px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .pmeta-value { font-size: 14px; font-weight: 800; color: var(--ink); }
+    .pmeta-value.teal { color: var(--teal); }
+    .pmeta-value.green { color: var(--green); }
+    .panel-actions { display: flex; gap: 8px; margin-bottom: 18px; }
+    .pa-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: var(--teal); color: #fff; font-size: 12px; font-weight: 700;
+      padding: 9px; border-radius: 8px; border: none;
+      transition: background 0.15s;
+    }
+    .pa-btn:hover { background: var(--teal-d); }
+    .pa-btn.outline {
+      background: var(--bg3); color: var(--ink-2);
+      border: 1px solid var(--border);
+    }
+    .pa-btn.outline:hover { background: var(--bg4); }
+    .pa-btn svg { width: 14px; height: 14px; }
+    .move-stage-row { margin-bottom: 18px; }
+    .move-stage-label { font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .move-stage-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ms-btn {
+      font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 6px;
+      border: 1px solid var(--teal-border); background: var(--teal-dim); color: var(--teal);
+      transition: background 0.15s;
+    }
+    .ms-btn:hover { background: rgba(22,180,210,0.2); }
+    .ms-btn.current { border-color: var(--border); background: var(--bg4); color: var(--ink-3); cursor: default; }
+    /* Timeline */
+    .timeline { }
+    .tl-title { font-size: 12px; font-weight: 700; color: var(--ink-2); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
+    .tl-item { display: flex; gap: 12px; margin-bottom: 16px; }
+    .tl-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .tl-icon svg { width: 12px; height: 12px; }
+    .tli-stage { background: var(--teal-dim); color: var(--teal); }
+    .tli-note { background: var(--amber-dim); color: var(--amber); }
+    .tli-email { background: rgba(167,139,250,0.12); color: #a78bfa; }
+    .tl-body { flex: 1; }
+    .tl-text { font-size: 12px; color: var(--ink); line-height: 1.5; }
+    .tl-time { font-size: 10px; color: var(--ink-3); margin-top: 2px; }
+    .tl-line { display: flex; gap: 12px; align-items: stretch; margin-bottom: 0; }
+    .tl-connector { width: 28px; display: flex; justify-content: center; flex-shrink: 0; }
+    .tl-connector::before { content: ''; width: 1px; background: var(--border); flex: 1; }
+
+    /* Section headings */
+    .section-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .section-hd h2 { font-size: 14px; font-weight: 700; color: var(--ink-2); letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    .demo-footer { border-top: 1px solid var(--border); padding: 16px 20px; text-align: center; background: var(--bg2); }
+    .demo-footer p { color: var(--ink-3); font-size: 11px; }
+    .demo-footer a { color: var(--teal); }
   </style>
 </head>
 <body>
-  <div id="tt-gallery-bar" style="position:fixed;top:0;left:0;right:0;height:32px;z-index:99999;background:rgba(10,10,15,0.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(22,180,210,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;"><a href="/" style="display:inline-flex;align-items:center;gap:5px;color:#16b4d2;font-size:11px;font-weight:600;text-decoration:none;letter-spacing:0.3px;" onmouseover="this.style.color='#5cd3e8'" onmouseout="this.style.color='#16b4d2'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Back to Gallery</a><span style="color:rgba(255,255,255,0.25);font-size:11px;letter-spacing:0.3px;">Trackt Tech Demo</span></div>
 
-<nav>
-  <span class="nav-brand">PIPELINE CRM</span>
-  <div class="nav-actions">
-    <span class="nav-link">Dashboard</span>
-    <span class="nav-link">Contacts</span>
-    <span class="nav-link">Reports</span>
-    <button class="nav-btn">+ New Deal</button>
-  </div>
-</nav>
-
-<div class="page">
-
-  <div class="page-header">
-    <div>
-      <div class="page-title">Sales Pipeline</div>
-      <div class="page-subtitle">June 2025 · 12 active deals</div>
-    </div>
+  <!-- Gallery bar -->
+  <div id="gallery-bar">
+    <a href="/">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Back to Gallery
+    </a>
+    <span class="label">Trackt Tech Demo</span>
   </div>
 
-  <!-- KPIs -->
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="kpi-label">Active Deals</div>
-      <div class="kpi-value cyan">12</div>
-      <div class="kpi-delta">+3 this month</div>
+  <div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-name">PipelineHQ</div>
+        <div class="sidebar-logo-sub">Sales CRM</div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="nav-section-label">Main</div>
+        <button class="nav-item active" onclick="switchView('dashboard', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" onclick="switchView('contacts', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Contacts
+          <span class="nav-badge">25</span>
+        </button>
+        <button class="nav-item" onclick="switchView('pipeline', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="4" height="18" rx="1"/><rect x="10" y="3" width="4" height="12" rx="1"/><rect x="18" y="3" width="4" height="16" rx="1"/></svg>
+          Pipeline
+        </button>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-row">
+          <div class="user-avatar">DT</div>
+          <div>
+            <div class="user-name">Daniel Trackt</div>
+            <div class="user-role">Account Owner</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main-area">
+
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div class="topbar-brand">
+          <span class="topbar-brand-name">PipelineHQ</span>
+        </div>
+        <span class="topbar-title" id="topbar-title">Dashboard</span>
+        <div class="topbar-right">
+          <button class="topbar-btn" onclick="openNewDeal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Deal
+          </button>
+          <div class="topbar-avatar">DT</div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD VIEW -->
+      <div class="view active" id="view-dashboard">
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-label">Pipeline Value</div>
+            <div class="kpi-value teal">$84,200</div>
+            <div class="kpi-delta up">↑ 18% from last month</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Open Deals</div>
+            <div class="kpi-value">18</div>
+            <div class="kpi-delta neutral">Across 3 stages</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Won This Month</div>
+            <div class="kpi-value green">$22,400</div>
+            <div class="kpi-delta up">↑ 5 deals closed</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Conversion Rate</div>
+            <div class="kpi-value">38%</div>
+            <div class="kpi-delta up">↑ 4% from last month</div>
+          </div>
+        </div>
+
+        <div class="dash-row">
+          <!-- Monthly revenue chart -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <div class="dash-card-title">Monthly Revenue Won</div>
+                <div class="dash-card-sub">Last 6 months</div>
+              </div>
+            </div>
+            <div class="chart-area">
+              <div class="bar-chart" id="bar-chart"></div>
+            </div>
+          </div>
+
+          <!-- Funnel / Pipeline breakdown -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div class="dash-card-title">Stage Breakdown</div>
+            </div>
+            <div class="funnel-list" style="padding-top:14px;">
+              <div class="funnel-row">
+                <span class="funnel-stage">Lead</span>
+                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:88%;background:#64748b;"></div></div>
+                <span class="funnel-count">7</span>
+                <span class="funnel-val">$24,200</span>
+              </div>
+              <div class="funnel-row">
+                <span class="funnel-stage">Qualified</span>
+                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:60%;background:#a78bfa;"></div></div>
+                <span class="funnel-count">5</span>
+                <span class="funnel-val">$40,500</span>
+              </div>
+              <div class="funnel-row">
+                <span class="funnel-stage">Proposal</span>
+                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:48%;background:var(--amber);"></div></div>
+                <span class="funnel-count">6</span>
+                <span class="funnel-val">$37,200</span>
+              </div>
+              <div class="funnel-row">
+                <span class="funnel-stage">Won</span>
+                <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:40%;background:var(--green);"></div></div>
+                <span class="funnel-count">5</span>
+                <span class="funnel-val">$48,900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity feed -->
+        <div class="dash-card">
+          <div class="dash-card-header" style="padding-bottom:0;">
+            <div class="dash-card-title">Recent Activity</div>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item"><div class="activity-dot dot-green"></div><div class="activity-body"><div class="activity-text">Deal <strong>Gulf Auto Parts</strong> closed won — $11,200</div><div class="activity-time">2 hours ago</div></div></div>
+            <div class="activity-item"><div class="activity-dot dot-teal"></div><div class="activity-body"><div class="activity-text"><strong>Suncoast Roofing</strong> moved from Qualified → Proposal</div><div class="activity-time">5 hours ago</div></div></div>
+            <div class="activity-item"><div class="activity-dot dot-amber"></div><div class="activity-body"><div class="activity-text">Note added on <strong>Rivera HVAC</strong>: "Follow up next Tuesday re: scope expansion"</div><div class="activity-time">Yesterday</div></div></div>
+            <div class="activity-item"><div class="activity-dot dot-teal"></div><div class="activity-body"><div class="activity-text">New contact <strong>Westchase Pet Clinic</strong> added to pipeline</div><div class="activity-time">Yesterday</div></div></div>
+            <div class="activity-item"><div class="activity-dot dot-green"></div><div class="activity-body"><div class="activity-text"><strong>New Port Richey Floors</strong> deal won — $9,800</div><div class="activity-time">2 days ago</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACTS VIEW -->
+      <div class="view" id="view-contacts">
+        <div class="contacts-toolbar">
+          <div class="search-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="search-input" type="text" id="contact-search" placeholder="Search by name or company..." oninput="filterContacts()" />
+          </div>
+          <select class="filter-select" id="status-filter" onchange="filterContacts()">
+            <option value="">All Stages</option>
+            <option value="lead">Lead</option>
+            <option value="qualified">Qualified</option>
+            <option value="proposal">Proposal</option>
+            <option value="won">Won</option>
+            <option value="lost">Lost</option>
+          </select>
+          <select class="filter-select" id="sort-field" onchange="filterContacts()">
+            <option value="name">Sort: Name</option>
+            <option value="company">Sort: Company</option>
+            <option value="value">Sort: Deal Value</option>
+          </select>
+        </div>
+        <div class="contacts-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th onclick="sortBy('name')">Contact <span class="sort-indicator" id="sort-name">↕</span></th>
+                <th onclick="sortBy('company')">Company <span class="sort-indicator" id="sort-company">↕</span></th>
+                <th>Stage</th>
+                <th onclick="sortBy('value')">Deal Value <span class="sort-indicator" id="sort-value">↕</span></th>
+                <th>Last Contact</th>
+              </tr>
+            </thead>
+            <tbody id="contacts-tbody"></tbody>
+          </table>
+        </div>
+        <div class="contacts-count" id="contacts-count"></div>
+      </div>
+
+      <!-- PIPELINE VIEW -->
+      <div class="view" id="view-pipeline">
+        <div class="kanban-wrap">
+          <div class="kanban" id="kanban-board"></div>
+        </div>
+      </div>
+
+      <div class="demo-footer">
+        <p>Demo website by <a href="https://trackt.tech" target="_blank" rel="noopener">Trackt Tech</a> — <a href="https://trackt.tech" target="_blank" rel="noopener">trackt.tech</a></p>
+      </div>
     </div>
-    <div class="kpi">
-      <div class="kpi-label">Pipeline Value</div>
-      <div class="kpi-value">$48,200</div>
-      <div class="kpi-delta">+12% vs last month</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Closed This Month</div>
-      <div class="kpi-value green">$18,400</div>
-      <div class="kpi-delta">2 deals won</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Win Rate</div>
-      <div class="kpi-value">67%</div>
-      <div class="kpi-delta neutral">+5% vs Q1</div>
-    </div>
+
   </div>
 
-  <!-- Kanban -->
-  <div class="section-title">Deal Pipeline</div>
-  <div class="kanban">
-    <div class="kanban-col col-prospect">
-      <div class="col-header">
-        <span class="col-name">Prospect</span>
-        <span class="col-count">5</span>
-      </div>
-      <div class="deal-card">
-        <div class="deal-name">Tampa Bay Roofing</div>
-        <div class="deal-meta">Intro call scheduled</div>
-        <div class="deal-value">$3,500</div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-name">Suncoast Dental</div>
-        <div class="deal-meta">Website audit pending</div>
-        <div class="deal-value">$2,800</div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-name">Bay Area Gym</div>
-        <div class="deal-meta">Referral — cold</div>
-        <div class="deal-value">$1,200</div>
-      </div>
-    </div>
+  <!-- Mobile nav -->
+  <nav class="mobile-nav">
+    <button class="mnav-item active" id="mnav-dashboard" onclick="switchView('dashboard', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </button>
+    <button class="mnav-item" id="mnav-contacts" onclick="switchView('contacts', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      Contacts
+    </button>
+    <button class="mnav-item" id="mnav-pipeline" onclick="switchView('pipeline', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="4" height="18" rx="1"/><rect x="10" y="3" width="4" height="12" rx="1"/><rect x="18" y="3" width="4" height="16" rx="1"/></svg>
+      Pipeline
+    </button>
+  </nav>
 
-    <div class="kanban-col">
-      <div class="col-header">
-        <span class="col-name">Qualified</span>
-        <span class="col-count">3</span>
+  <!-- Deal detail panel overlay -->
+  <div class="panel-overlay" id="panel-overlay" onclick="closePanel()"></div>
+  <div class="detail-panel" id="detail-panel">
+    <div class="panel-header">
+      <div>
+        <div style="font-size:11px;color:var(--ink-3);margin-bottom:2px;">Deal Details</div>
+        <div class="panel-company" id="panel-company"></div>
       </div>
-      <div class="deal-card">
-        <div class="deal-name">Green Leaf Nursery</div>
-        <div class="deal-meta">Demo call done</div>
-        <div class="deal-value">$5,400</div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-name">Clearwater Med Spa</div>
-        <div class="deal-meta">Requirements meeting</div>
-        <div class="deal-value">$7,200</div>
-      </div>
+      <button class="panel-close" onclick="closePanel()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
-
-    <div class="kanban-col">
-      <div class="col-header">
-        <span class="col-name">Proposal</span>
-        <span class="col-count">2</span>
-      </div>
-      <div class="deal-card">
-        <div class="deal-name">Rivera Landscaping</div>
-        <div class="deal-meta">Proposal sent · awaiting</div>
-        <div class="deal-value">$4,200</div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-name">Ybor Food Hall</div>
-        <div class="deal-meta">Negotiating scope</div>
-        <div class="deal-value">$9,800</div>
-      </div>
-    </div>
-
-    <div class="kanban-col col-closed">
-      <div class="col-header">
-        <span class="col-name">Closed Won</span>
-        <span class="col-count">2</span>
-      </div>
-      <div class="deal-card">
-        <div class="deal-name">813 Records</div>
-        <div class="deal-meta">Website + branding</div>
-        <div class="deal-value green">$6,400</div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-name">Ridgeline Towing</div>
-        <div class="deal-meta">Full site build</div>
-        <div class="deal-value green">$3,200</div>
-      </div>
-    </div>
+    <div class="panel-body" id="panel-body"></div>
   </div>
 
-  <!-- Contacts table -->
-  <div class="table-outer"><div class="table-wrap">
-    <div class="table-header">
-      <span class="table-title">Contacts</span>
-      <button class="add-btn">+ Add Contact</button>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Company</th>
-          <th>Deal Value</th>
-          <th>Status</th>
-          <th>Last Contact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><div class="contact-name"><div class="avatar av-c">MR</div><span class="contact-full">Marco Rivera</span></div></td>
-          <td>Rivera Landscaping</td>
-          <td style="color:#16b4d2;font-weight:700;">$4,200</td>
-          <td><span class="status-badge sb-proposal">Proposal</span></td>
-          <td>2 days ago</td>
-        </tr>
-        <tr>
-          <td><div class="contact-name"><div class="avatar av-g">SG</div><span class="contact-full">Sofia Gutierrez</span></div></td>
-          <td>Clearwater Med Spa</td>
-          <td style="color:#16b4d2;font-weight:700;">$7,200</td>
-          <td><span class="status-badge sb-active">Qualified</span></td>
-          <td>Today</td>
-        </tr>
-        <tr>
-          <td><div class="contact-name"><div class="avatar av-p">TK</div><span class="contact-full">Tyler Kim</span></div></td>
-          <td>Ybor Food Hall</td>
-          <td style="color:#16b4d2;font-weight:700;">$9,800</td>
-          <td><span class="status-badge sb-proposal">Proposal</span></td>
-          <td>Yesterday</td>
-        </tr>
-        <tr>
-          <td><div class="contact-name"><div class="avatar av-o">JO</div><span class="contact-full">Jason Ortega</span></div></td>
-          <td>Tampa Bay Roofing</td>
-          <td style="color:#94a3b8;">$3,500</td>
-          <td><span class="status-badge sb-prospect">Prospect</span></td>
-          <td>5 days ago</td>
-        </tr>
-        <tr>
-          <td><div class="contact-name"><div class="avatar av-b">AL</div><span class="contact-full">Angela Liu</span></div></td>
-          <td>Green Leaf Nursery</td>
-          <td style="color:#16b4d2;font-weight:700;">$5,400</td>
-          <td><span class="status-badge sb-active">Qualified</span></td>
-          <td>3 days ago</td>
-        </tr>
-        <tr>
-          <td><div class="contact-name"><div class="avatar av-r">TR</div><span class="contact-full">Tyrone Reed</span></div></td>
-          <td>813 Records</td>
-          <td style="color:#10b981;font-weight:700;">$6,400</td>
-          <td><span class="status-badge sb-closed">Closed Won</span></td>
-          <td>1 week ago</td>
-        </tr>
-      </tbody>
-    </table>
-  </div><!-- /table-wrap -->
-  </div><!-- /table-outer -->
+  <script>
+    // ── DATA ──
+    const colors = ['#16b4d2','#10b981','#a78bfa','#f97316','#60a5fa','#f43f5e','#fbbf24','#34d399','#818cf8','#fb923c'];
+    const contacts = [
+      {id:1,  name:'Mike Torres',      company:'Coastal Plumbing',         stage:'lead',      value:3200,  lastContact:'3 days ago',  age:'8d', avatar:'MT'},
+      {id:2,  name:'Jennifer Lee',     company:'Bay Area Landscaping',     stage:'qualified', value:5500,  lastContact:'Today',       age:'14d', avatar:'JL'},
+      {id:3,  name:'Carlos Rivera',    company:'Rivera HVAC',              stage:'qualified', value:8900,  lastContact:'Yesterday',   age:'21d', avatar:'CR'},
+      {id:4,  name:'David Chen',       company:'Suncoast Roofing',         stage:'proposal',  value:12400, lastContact:'2 days ago',  age:'28d', avatar:'DC'},
+      {id:5,  name:'Robert Kim',       company:'Gulf Auto Parts',          stage:'won',       value:11200, lastContact:'Today',       age:'45d', avatar:'RK'},
+      {id:6,  name:'Sarah Williams',   company:'Tampa Bay Cleaning',       stage:'lead',      value:2800,  lastContact:'4 days ago',  age:'5d',  avatar:'SW'},
+      {id:7,  name:'James Martinez',   company:'Bayshore Electric',        stage:'proposal',  value:9600,  lastContact:'Yesterday',   age:'19d', avatar:'JM'},
+      {id:8,  name:'Lisa Brown',       company:'Diamond Pest Control',     stage:'lead',      value:1800,  lastContact:'1 week ago',  age:'7d',  avatar:'LB'},
+      {id:9,  name:'Kevin Johnson',    company:'Clearwater Concrete',      stage:'won',       value:18500, lastContact:'3 days ago',  age:'52d', avatar:'KJ'},
+      {id:10, name:'Amanda Davis',     company:'South Tampa Fitness',      stage:'proposal',  value:4200,  lastContact:'2 days ago',  age:'16d', avatar:'AD'},
+      {id:11, name:'Dr. Patricia Wong',company:'Palma Ceia Dental',        stage:'qualified', value:7800,  lastContact:'Today',       age:'11d', avatar:'PW'},
+      {id:12, name:'Tony Nguyen',      company:'Harbor View Restaurant',   stage:'lead',      value:3600,  lastContact:'5 days ago',  age:'6d',  avatar:'TN'},
+      {id:13, name:'Alex Morales',     company:'Ybor City Tattoo',         stage:'lost',      value:1200,  lastContact:'2 weeks ago', age:'38d', avatar:'AM'},
+      {id:14, name:'Brian Scott',      company:'Pasco County Pool Service',stage:'qualified', value:6400,  lastContact:'Yesterday',   age:'18d', avatar:'BS'},
+      {id:15, name:'Chris Thompson',   company:'Brandon Auto Repair',      stage:'lead',      value:4800,  lastContact:'3 days ago',  age:'9d',  avatar:'CT'},
+      {id:16, name:'Nicole Anderson',  company:'St. Pete Photography',     stage:'won',       value:3200,  lastContact:'1 week ago',  age:'41d', avatar:'NA'},
+      {id:17, name:'Mark Rodriguez',   company:'Seminole Landscaping',     stage:'proposal',  value:8100,  lastContact:'Today',       age:'22d', avatar:'MR'},
+      {id:18, name:'Sandra Miller',    company:'Bay Oaks Realty',          stage:'qualified', value:15200, lastContact:'Yesterday',   age:'15d', avatar:'SM'},
+      {id:19, name:'Dr. Emily Chang',  company:'Westchase Pet Clinic',     stage:'lead',      value:5600,  lastContact:'Today',       age:'2d',  avatar:'EC'},
+      {id:20, name:'Greg Wilson',      company:'Oldsmar Printing Co.',     stage:'lost',      value:2100,  lastContact:'3 weeks ago', age:'44d', avatar:'GW'},
+      {id:21, name:'Tom Baker',        company:'New Port Richey Floors',   stage:'won',       value:9800,  lastContact:'2 days ago',  age:'39d', avatar:'TB'},
+      {id:22, name:'Maria Sanchez',    company:"Land O' Lakes Pizza",      stage:'lead',      value:2400,  lastContact:'4 days ago',  age:'4d',  avatar:'MS'},
+      {id:23, name:'Rachel Turner',    company:'Wesley Chapel Yoga',       stage:'proposal',  value:3800,  lastContact:'Yesterday',   age:'13d', avatar:'RT'},
+      {id:24, name:'Jake Moore',       company:'Dunedin Kayak Rentals',    stage:'qualified', value:4600,  lastContact:'3 days ago',  age:'17d', avatar:'JM'},
+      {id:25, name:'Dennis Hall',      company:'Citrus Park Storage',      stage:'won',       value:6200,  lastContact:'1 week ago',  age:'34d', avatar:'DH'},
+    ];
 
-  <!-- Revenue chart -->
-  <div class="chart-wrap">
-    <div class="chart-title">Revenue Closed</div>
-    <div class="chart-sub">Last 6 months</div>
-    <div class="bars">
-      <div class="bar-col">
-        <div class="bar-val">$8.2k</div>
-        <div class="bar" style="height:52px;"></div>
-        <div class="bar-label">Jan</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-val">$11k</div>
-        <div class="bar" style="height:68px;"></div>
-        <div class="bar-label">Feb</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-val">$9.5k</div>
-        <div class="bar" style="height:60px;"></div>
-        <div class="bar-label">Mar</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-val">$14.1k</div>
-        <div class="bar" style="height:88px;"></div>
-        <div class="bar-label">Apr</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-val">$16.8k</div>
-        <div class="bar" style="height:100px;"></div>
-        <div class="bar-label">May</div>
-      </div>
-      <div class="bar-col">
-        <div class="bar-val">$18.4k</div>
-        <div class="bar" style="height:100px; background: linear-gradient(180deg,#10b981 0%,rgba(16,185,129,0.5) 100%);"></div>
-        <div class="bar-label">Jun</div>
-      </div>
-    </div>
-  </div>
+    const stageOrder = ['lead','qualified','proposal','won'];
+    const stageLabels = { lead:'Lead', qualified:'Qualified', proposal:'Proposal', won:'Closed Won' };
+    const stageColors = { lead:'sp-lead', qualified:'sp-qualified', proposal:'sp-proposal', won:'sp-won', lost:'sp-lost' };
+    const avatarColors = colors;
+    let sortField = 'name', sortDir = 1;
+    let openDealId = null;
 
-</div>
+    // ── NAVIGATION ──
+    function switchView(v, btn) {
+      ['dashboard','contacts','pipeline'].forEach(name => {
+        document.getElementById('view-' + name).classList.toggle('active', name === v);
+      });
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.querySelectorAll('.mnav-item').forEach(n => n.classList.remove('active'));
+      if (btn) {
+        btn.classList.add('active');
+        const mnaId = 'mnav-' + v;
+        const mna = document.getElementById(mnaId);
+        if (mna) mna.classList.add('active');
+      }
+      const titles = { dashboard:'Dashboard', contacts:'Contacts', pipeline:'Pipeline' };
+      document.getElementById('topbar-title').textContent = titles[v] || v;
+      if (v === 'contacts') renderContacts();
+      if (v === 'pipeline') renderKanban();
+    }
 
-<footer>
-  Demo only — not a real product. &nbsp;|&nbsp; Built by <a href="https://trackt.tech">Trackt</a> — trackt.tech
-</footer>
+    // ── CONTACTS ──
+    function getAvatarColor(i) { return avatarColors[i % avatarColors.length]; }
+    function filterContacts() {
+      const q = document.getElementById('contact-search').value.toLowerCase();
+      const sf = document.getElementById('status-filter').value;
+      let filtered = contacts.filter(c => {
+        const matchQ = !q || c.name.toLowerCase().includes(q) || c.company.toLowerCase().includes(q);
+        const matchS = !sf || c.stage === sf;
+        return matchQ && matchS;
+      });
+      const sf2 = document.getElementById('sort-field').value;
+      filtered.sort((a,b) => {
+        if (sf2 === 'value') return (b.value - a.value);
+        const ka = sf2 === 'company' ? a.company : a.name;
+        const kb = sf2 === 'company' ? b.company : b.name;
+        return ka.localeCompare(kb);
+      });
+      renderContactRows(filtered);
+    }
 
+    function sortBy(field) {
+      if (sortField === field) sortDir *= -1; else { sortField = field; sortDir = 1; }
+      document.querySelectorAll('.sort-indicator').forEach(el => el.textContent = '↕');
+      const el = document.getElementById('sort-' + field);
+      if (el) el.textContent = sortDir > 0 ? '↑' : '↓';
+      document.querySelectorAll('thead th').forEach(th => th.classList.remove('sorted'));
+      const ths = document.querySelectorAll('thead th');
+      const fieldIdx = {name:0, company:1, value:3};
+      if (ths[fieldIdx[field]]) ths[fieldIdx[field]].classList.add('sorted');
+      filterContacts();
+    }
+
+    function renderContacts() {
+      document.getElementById('sort-field').value = 'name';
+      filterContacts();
+    }
+
+    function renderContactRows(list) {
+      const tbody = document.getElementById('contacts-tbody');
+      tbody.innerHTML = '';
+      list.forEach((c, i) => {
+        const bg = getAvatarColor(c.id - 1);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <div class="contact-cell">
+              <div class="c-avatar" style="background:${bg}22;color:${bg};">${c.avatar}</div>
+              <div><div class="c-name">${c.name}</div></div>
+            </div>
+          </td>
+          <td>${c.company}</td>
+          <td><span class="status-pill ${stageColors[c.stage]}">${stageLabels[c.stage] || 'Lost'}</span></td>
+          <td style="color:var(--teal);font-weight:700;">$${c.value.toLocaleString()}</td>
+          <td>${c.lastContact}</td>
+        `;
+        tr.onclick = () => openDeal(c.id);
+        tbody.appendChild(tr);
+      });
+      document.getElementById('contacts-count').textContent = `Showing ${list.length} of ${contacts.length} contacts`;
+    }
+
+    // ── PIPELINE / KANBAN ──
+    function renderKanban() {
+      const board = document.getElementById('kanban-board');
+      board.innerHTML = '';
+      stageOrder.forEach(stage => {
+        const deals = contacts.filter(c => c.stage === stage);
+        const total = deals.reduce((s, c) => s + c.value, 0);
+        const col = document.createElement('div');
+        col.className = 'k-col';
+        col.dataset.stage = stage;
+        col.innerHTML = `
+          <div class="k-col-header">
+            <div>
+              <div class="k-col-name">${stageLabels[stage]}</div>
+              <div class="k-col-total">$${total.toLocaleString()}</div>
+            </div>
+            <div class="k-col-count">${deals.length}</div>
+          </div>
+          <div class="k-cards"></div>
+        `;
+        const cardsEl = col.querySelector('.k-cards');
+        deals.forEach(c => {
+          const card = document.createElement('div');
+          card.className = 'deal-card';
+          card.dataset.id = c.id;
+          card.draggable = true;
+          const stages = stageOrder.filter(s => s !== stage);
+          const moveBtns = stages.map(s => `<button class="deal-move-btn" onclick="event.stopPropagation();moveDeal(${c.id},'${s}')">→ ${stageLabels[s]}</button>`).join('');
+          card.innerHTML = `
+            <div class="deal-company">${c.company}</div>
+            <div class="deal-contact">${c.name}</div>
+            <div class="deal-footer">
+              <span class="deal-value">$${c.value.toLocaleString()}</span>
+              <span class="deal-age">${c.age}</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;">${moveBtns}</div>
+          `;
+          card.onclick = () => openDeal(c.id);
+          card.addEventListener('dragstart', e => { e.dataTransfer.setData('id', c.id); card.classList.add('dragging'); });
+          card.addEventListener('dragend', () => card.classList.remove('dragging'));
+          cardsEl.appendChild(card);
+        });
+        col.addEventListener('dragover', e => { e.preventDefault(); col.classList.add('drag-over'); });
+        col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+        col.addEventListener('drop', e => {
+          e.preventDefault(); col.classList.remove('drag-over');
+          const id = +e.dataTransfer.getData('id');
+          const contact = contacts.find(c => c.id === id);
+          if (contact && contact.stage !== stage) { contact.stage = stage; renderKanban(); }
+        });
+        board.appendChild(col);
+      });
+    }
+
+    function moveDeal(id, newStage) {
+      const c = contacts.find(x => x.id === id);
+      if (c) { c.stage = newStage; renderKanban(); if (openDealId === id) openDeal(id); }
+    }
+
+    // ── DEAL DETAIL ──
+    const timelines = {
+      default: [
+        {type:'stage', text:'Deal created and added to pipeline', time:'3 weeks ago'},
+        {type:'email', text:'Initial outreach email sent', time:'3 weeks ago'},
+        {type:'note', text:'Called — interested, wants a proposal next week', time:'2 weeks ago'},
+        {type:'stage', text:'Moved to Qualified after discovery call', time:'1 week ago'},
+        {type:'note', text:'Sent detailed proposal via email', time:'3 days ago'},
+      ]
+    };
+
+    function openDeal(id) {
+      openDealId = id;
+      const c = contacts.find(x => x.id === id);
+      const bg = getAvatarColor(c.id - 1);
+      document.getElementById('panel-company').textContent = c.company;
+      const stageColors2 = { lead:'var(--teal-dim)', qualified:'rgba(167,139,250,0.12)', proposal:'var(--amber-dim)', won:'var(--green-dim)', lost:'var(--red-dim)' };
+      const stageText = { lead:'var(--teal)', qualified:'#a78bfa', proposal:'var(--amber)', won:'var(--green)', lost:'var(--red)' };
+      const stageNextLabels = stageOrder.filter(s => s !== c.stage);
+      const stageBtns = stageOrder.map(s => `<button class="ms-btn${s===c.stage?' current':''}" onclick="moveDeal(${c.id},'${s}')">${stageLabels[s]}</button>`).join('');
+      const tl = timelines.default;
+      const tlHtml = tl.map((item, i) => `
+        <div class="tl-item">
+          <div class="tl-icon tli-${item.type}">
+            ${item.type==='stage'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>':''}
+            ${item.type==='note'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>':''}
+            ${item.type==='email'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>':''}
+          </div>
+          <div class="tl-body">
+            <div class="tl-text">${item.text}</div>
+            <div class="tl-time">${item.time}</div>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('panel-body').innerHTML = `
+        <span class="panel-stage-badge" style="background:${stageColors2[c.stage]};color:${stageText[c.stage]};">${stageLabels[c.stage]||'Lost'}</span>
+        <div class="panel-meta">
+          <div class="pmeta-item">
+            <div class="pmeta-label">Contact</div>
+            <div class="pmeta-value" style="font-size:13px;">${c.name}</div>
+          </div>
+          <div class="pmeta-item">
+            <div class="pmeta-label">Deal Value</div>
+            <div class="pmeta-value teal">$${c.value.toLocaleString()}</div>
+          </div>
+          <div class="pmeta-item">
+            <div class="pmeta-label">In Pipeline</div>
+            <div class="pmeta-value" style="font-size:13px;">${c.age}</div>
+          </div>
+          <div class="pmeta-item">
+            <div class="pmeta-label">Last Contact</div>
+            <div class="pmeta-value" style="font-size:12px;">${c.lastContact}</div>
+          </div>
+        </div>
+        <div class="panel-actions">
+          <button class="pa-btn" onclick="alert('Demo — in your version this opens an email compose window.')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Email
+          </button>
+          <button class="pa-btn outline" onclick="alert('Demo — in your version this adds a note to the activity timeline.')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Add Note
+          </button>
+        </div>
+        <div class="move-stage-row">
+          <div class="move-stage-label">Move Stage</div>
+          <div class="move-stage-btns">${stageBtns}</div>
+        </div>
+        <div class="timeline">
+          <div class="tl-title">Activity Timeline</div>
+          ${tlHtml}
+        </div>
+      `;
+      document.getElementById('panel-overlay').classList.add('open');
+      document.getElementById('detail-panel').classList.add('open');
+    }
+
+    function closePanel() {
+      document.getElementById('panel-overlay').classList.remove('open');
+      document.getElementById('detail-panel').classList.remove('open');
+      openDealId = null;
+    }
+
+    function openNewDeal() {
+      alert('Demo — in your version this opens an "Add Deal" modal where you can enter company, contact, deal value, and assign a stage.');
+    }
+
+    // ── BAR CHART ──
+    function buildChart() {
+      const data = [
+        {m:'Jan', v:8400},
+        {m:'Feb', v:12200},
+        {m:'Mar', v:9800},
+        {m:'Apr', v:15600},
+        {m:'May', v:18900},
+        {m:'Jun', v:22400},
+      ];
+      const max = Math.max(...data.map(d => d.v));
+      const chart = document.getElementById('bar-chart');
+      chart.innerHTML = '';
+      data.forEach(d => {
+        const pct = (d.v / max * 100).toFixed(1);
+        const grp = document.createElement('div');
+        grp.className = 'bar-group';
+        grp.innerHTML = `
+          <div class="bar-outer">
+            <div class="bar-fill" style="height:${pct}%;" title="$${d.v.toLocaleString()}"></div>
+          </div>
+          <div class="bar-label">${d.m}</div>
+        `;
+        chart.appendChild(grp);
+      });
+    }
+
+    // ── INIT ──
+    buildChart();
+    renderContacts();
+  </script>
 </body>
 </html>
