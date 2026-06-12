@@ -639,8 +639,8 @@
         localStorage.setItem('trackt-demo-theme', t);
       }
       var isDark = document.documentElement.classList.contains('dark');
-      if (isDark) { moon.style.display = 'none'; toggle.setAttribute('aria-label', 'Switch to light mode'); }
-      else { sun.style.display = 'none'; toggle.setAttribute('aria-label', 'Switch to dark mode'); }
+      if (isDark) { moon.style.display = 'none'; sun.style.display = ''; toggle.setAttribute('aria-label', 'Switch to light mode'); }
+      else { sun.style.display = 'none'; moon.style.display = ''; toggle.setAttribute('aria-label', 'Switch to dark mode'); }
       toggle.addEventListener('click', function() {
         var dark = document.documentElement.classList.contains('dark');
         document.documentElement.classList.add('theme-transition');
