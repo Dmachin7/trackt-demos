@@ -235,6 +235,11 @@
     html.dark .tag-book { background: rgba(5,150,105,0.15); color: #34d399; }
     html.dark .tag-crm  { background: rgba(22,180,210,0.15); color: #38bdf8; }
     html.dark .tag-shop { background: rgba(234,88,12,0.15); color: #fb923c; }
+    .tag-client { background: rgba(77,232,138,0.1); color: #15803d; }
+    html.dark .tag-client { background: rgba(77,232,138,0.15); color: #4DE88A; }
+    .demo-card--client:hover { border-color: rgba(77,232,138,0.3); }
+    .demo-card--client .ftag::before { background: #4DE88A; }
+    .demo-card--client .card-cta { color: #4DE88A; }
     .card-title {
       font-size: clamp(20px, 3vw, 28px);
       font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
@@ -388,6 +393,62 @@
   <section class="demos">
     <p class="demos-label">4 flagship demos · click to explore</p>
     <div class="demo-list">
+
+      <!-- 0 — ARTHUR'S 1OF1 (CLIENT) -->
+      <a href="https://arthurs1of1.trackt.tech" target="_blank" rel="noopener" class="demo-card demo-card--client fade-in" aria-label="View Arthur's 1of1 Bracelets — live client project with custom bracelet configurator and Shopify checkout">
+        <div class="card-preview" aria-hidden="true">
+          <div class="preview-bar">
+            <span class="p-dot p-r"></span><span class="p-dot p-y"></span><span class="p-dot p-g"></span>
+            <span class="p-url">arthurs1of1.trackt.tech</span>
+          </div>
+          <div class="preview-content">
+            <div style="background:#0d0d0d;height:100%;padding:14px 16px;font-family:sans-serif;min-height:240px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid #222;padding-bottom:8px;">
+                <div>
+                  <div style="color:#4DE88A;font-size:10px;font-weight:900;letter-spacing:2px;">ARTHUR'S 1OF1</div>
+                  <div style="color:#555;font-size:7px;letter-spacing:1px;margin-top:1px;">HANDMADE BRACELETS</div>
+                </div>
+                <div style="background:#4DE88A;color:#000;font-size:8px;font-weight:800;padding:4px 9px;border-radius:4px;">Cart (0)</div>
+              </div>
+              <div style="color:#555;font-size:7px;font-weight:700;letter-spacing:1px;margin-bottom:7px;">BUILD YOUR BRACELET — CHOOSE STONES</div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px;">
+                <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#9b59b6,#6c3483);border:2px solid #4DE88A;"></div>
+                <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#e8b4b8,#c77dff);border:1px solid #333;"></div>
+                <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#48cae4,#0077b6);border:1px solid #333;"></div>
+                <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#2d6a4f,#74c69d);border:1px solid #333;"></div>
+                <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#f4a261,#e76f51);border:1px solid #333;"></div>
+                <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#e9d8a6,#b5a077);border:1px solid #333;"></div>
+                <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#2b2d42,#4a4e69);border:2px solid #4DE88A;"></div>
+                <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#d62828,#a4133c);border:1px solid #333;"></div>
+              </div>
+              <div style="background:#161616;border:1px solid rgba(77,232,138,0.2);border-radius:5px;padding:5px 8px;margin-bottom:8px;display:flex;gap:5px;align-items:center;">
+                <div style="width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#9b59b6,#6c3483);flex-shrink:0;"></div>
+                <div style="width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#2b2d42,#4a4e69);flex-shrink:0;"></div>
+                <span style="color:#4DE88A;font-size:7px;font-weight:700;margin-left:2px;">2 of 5 selected</span>
+              </div>
+              <div style="display:flex;gap:4px;margin-bottom:10px;">
+                <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:4px;padding:3px 7px;font-size:7px;color:#444;font-weight:600;">6"</div>
+                <div style="background:#4DE88A;border:1px solid #4DE88A;border-radius:4px;padding:3px 7px;font-size:7px;color:#000;font-weight:800;">7"</div>
+                <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:4px;padding:3px 7px;font-size:7px;color:#444;font-weight:600;">7.5"</div>
+                <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:4px;padding:3px 7px;font-size:7px;color:#444;font-weight:600;">8"</div>
+              </div>
+              <div style="background:#4DE88A;color:#000;text-align:center;font-size:8px;font-weight:800;padding:7px;border-radius:5px;letter-spacing:0.5px;">Add to Cart — $20</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-copy">
+          <span class="card-tag tag-client">Client Project</span>
+          <h2 class="card-title">Arthur's 1of1 Bracelets</h2>
+          <p class="card-problem">Custom bracelet configurator with live Shopify checkout integration. Customers build their own stone or glass bracelet choosing up to 5 crystals or colors, pick a size, and check out directly. Built for a Tampa-based handmade jewelry brand.</p>
+          <div class="card-features">
+            <span class="ftag">Custom Configurator</span>
+            <span class="ftag">Shopify Integration</span>
+            <span class="ftag">Mobile First</span>
+            <span class="ftag">Live Client</span>
+          </div>
+          <span class="card-cta">View live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </div>
+      </a>
 
       <!-- 1 — TOWING -->
       <a href="/towing/" class="demo-card fade-in" aria-label="View Ridgeline Towing &amp; Recovery demo — towing dispatch website">
