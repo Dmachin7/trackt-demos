@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Ember & Oak — Wood-Fired. Farm-Fresh. Unforgettable.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal-deep: #1c1917;
+      --charcoal: #292524;
+      --charcoal-mid: #44403c;
+      --amber: #d97706;
+      --amber-light: #fbbf24;
+      --cream: #fafaf9;
+      --text-light: #e7e5e4;
+      --text-muted: #78716c;
+      --text-warm: #a8a29e;
+      --error: #ef4444;
+      --success: #22c55e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--charcoal-deep);
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* ──────────────────────────────────────────────
+       UTILITY
+    ────────────────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .amber { color: var(--amber); }
+    .amber-light { color: var(--amber-light); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-amber {
+      background: var(--amber);
+      color: #fff;
+    }
+    .btn-amber:hover {
+      background: var(--amber-light);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(217,119,6,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-light);
+      border: 1.5px solid rgba(231,229,228,0.4);
+    }
+    .btn-outline:hover {
+      border-color: var(--amber);
+      color: var(--amber-light);
+      transform: translateY(-1px);
+    }
+
+    /* ──────────────────────────────────────────────
+       FADE-IN ANIMATION
+    ────────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+
+    /* ──────────────────────────────────────────────
+       NAV
+    ────────────────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(28,25,23,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.3s ease;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      padding: 0 32px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-light);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-logo span { color: var(--amber); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-warm);
+      text-decoration: none;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--amber-light); }
+
+    .nav-links .portfolio-link {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+    .nav-links .portfolio-link:hover { color: var(--text-warm); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-cta {
+      background: var(--amber);
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--amber-light);
+      box-shadow: 0 4px 16px rgba(217,119,6,0.4);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-light);
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(28,25,23,0.97);
+      padding: 24px 32px 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text-warm);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--amber-light); }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .mob-cta {
+      margin-top: 20px;
+      background: var(--amber);
+      color: #fff;
+      text-align: center;
+      padding: 14px;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+    }
+
+    /* ──────────────────────────────────────────────
+       HERO
+    ────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--charcoal-deep);
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 60%, rgba(217,119,6,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 30% 70%, rgba(251,191,36,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 50% at 75% 40%, rgba(217,119,6,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 140px 24px 100px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      border: 1px solid rgba(217,119,6,0.4);
+      padding: 7px 18px;
+      border-radius: 50px;
+      margin-bottom: 32px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      color: var(--text-light);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--amber-light);
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--text-warm);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hero-hours {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .hero-hours span { color: var(--text-warm); margin: 0 8px; }
+
+    /* ──────────────────────────────────────────────
+       SECTION LABELS
+    ────────────────────────────────────────────── */
+    .section-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 520px;
+    }
+
+    /* ──────────────────────────────────────────────
+       ORDERING SECTION
+    ────────────────────────────────────────────── */
+    #order {
+      background: var(--charcoal);
+      padding: 100px 0 140px;
+    }
+
+    .order-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .order-header .section-desc { margin: 0 auto; }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      background: rgba(28,25,23,0.6);
+      padding: 6px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 40px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px 20px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: var(--text-warm); }
+
+    .tab-btn.active {
+      background: var(--amber);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .menu-card {
+      background: var(--charcoal-deep);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .menu-card:hover {
+      border-color: rgba(217,119,6,0.3);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    .menu-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .menu-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.3;
+    }
+
+    .menu-price {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--amber-light);
+      white-space: nowrap;
+    }
+
+    .menu-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .add-btn {
+      align-self: flex-start;
+      margin-top: 6px;
+      background: transparent;
+      border: 1.5px solid rgba(217,119,6,0.5);
+      color: var(--amber);
+      padding: 7px 18px;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .add-btn:hover {
+      background: var(--amber);
+      color: #fff;
+      border-color: var(--amber);
+    }
+    .add-btn.added {
+      background: var(--amber);
+      color: #fff;
+      border-color: var(--amber);
+    }
+
+    /* Cart Bar */
+    #cart-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      background: var(--charcoal-deep);
+      border-top: 1px solid rgba(217,119,6,0.3);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+    #cart-bar.visible { transform: translateY(0); }
+
+    .cart-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cart-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .cart-label {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .cart-total {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--amber-light);
+    }
+
+    .checkout-btn {
+      background: var(--amber);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .checkout-btn:hover {
+      background: var(--amber-light);
+      box-shadow: 0 4px 20px rgba(217,119,6,0.4);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--charcoal);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 52px 48px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text-light); }
+
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      background: rgba(34,197,94,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 1.8rem;
+    }
+
+    .modal h3 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: var(--text-light);
+    }
+
+    .modal p {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    .modal-meta {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(28,25,23,0.8);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: var(--text-warm);
+    }
+
+    .modal-btn {
+      margin-top: 28px;
+      background: var(--amber);
+      color: #fff;
+      border: none;
+      padding: 13px 32px;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modal-btn:hover { background: var(--amber-light); }
+
+    /* ──────────────────────────────────────────────
+       RESERVATIONS
+    ────────────────────────────────────────────── */
+    #reservations {
+      background: var(--cream);
+      padding: 100px 0;
+    }
+
+    #reservations .section-eyebrow { color: #92400e; }
+    #reservations .section-title { color: #1c1917; }
+    #reservations .section-desc { color: #57534e; }
+
+    .reservations-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .res-info h2 { color: #1c1917; }
+    .res-info p {
+      color: #57534e;
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .res-detail {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .res-detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .res-detail-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(217,119,6,0.12);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .res-detail-text {
+      font-size: 0.875rem;
+      color: #57534e;
+      line-height: 1.5;
+    }
+    .res-detail-text strong {
+      display: block;
+      color: #292524;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .res-form {
+      background: #fff;
+      border: 1px solid #e7e5e4;
+      border-radius: 12px;
+      padding: 40px 36px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+    }
+
+    .res-form h3 {
+      font-size: 1.5rem;
+      color: #1c1917;
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #44403c;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #d6d3d1;
+      border-radius: 5px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      color: #1c1917;
+      background: #fafaf9;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(217,119,6,0.12);
+    }
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--amber);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 6px;
+    }
+    .form-submit:hover {
+      background: #b45309;
+      box-shadow: 0 4px 16px rgba(217,119,6,0.35);
+    }
+
+    .form-success {
+      display: none;
+      padding: 20px 24px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .form-success.show { display: block; }
+    .form-success p {
+      color: #166534;
+      font-weight: 500;
+      font-size: 0.9375rem;
+    }
+
+    /* ──────────────────────────────────────────────
+       ABOUT
+    ────────────────────────────────────────────── */
+    #about {
+      background: var(--charcoal-deep);
+      padding: 110px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .about-pull-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.3;
+      color: var(--text-light);
+    }
+
+    .about-pull-quote::before {
+      content: '\201C';
+      display: block;
+      font-size: 5rem;
+      line-height: 0.6;
+      color: var(--amber);
+      margin-bottom: 20px;
+    }
+
+    .about-pull-quote strong {
+      display: block;
+      margin-top: 20px;
+      font-style: normal;
+      font-size: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--amber);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #3d2b1f 0%, #5c3d2e 25%, #2d1b0f 50%, #4a2e1a 75%, #1c1005 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 40% 60%, rgba(217,119,6,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 40% at 80% 30%, rgba(251,191,36,0.12) 0%, transparent 60%);
+    }
+
+    .about-photo-label {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .about-photo-label span {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: rgba(231,229,228,0.9);
+      letter-spacing: 0.06em;
+    }
+    .about-photo-label small {
+      display: block;
+      font-size: 0.75rem;
+      color: rgba(217,119,6,0.8);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    /* ──────────────────────────────────────────────
+       PRESS BAR
+    ────────────────────────────────────────────── */
+    #press {
+      background: #111110;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 44px 0;
+    }
+
+    .press-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .press-item {
+      flex: 1;
+      min-width: 240px;
+      padding: 20px 40px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .press-item:last-child { border-right: none; }
+
+    .press-award {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9375rem;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .press-source {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    /* ──────────────────────────────────────────────
+       GALLERY
+    ────────────────────────────────────────────── */
+    #gallery {
+      background: var(--charcoal);
+      padding: 100px 0;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover { transform: scale(1.02); }
+
+    .gallery-item:nth-child(1) {
+      background: linear-gradient(135deg, #7c2d12 0%, #c2410c 40%, #9a3412 100%);
+    }
+    .gallery-item:nth-child(2) {
+      background: linear-gradient(135deg, #1c3a2a 0%, #2d6a4f 50%, #52b788 100%);
+    }
+    .gallery-item:nth-child(3) {
+      background: linear-gradient(135deg, #431407 0%, #78350f 50%, #b45309 100%);
+    }
+    .gallery-item:nth-child(4) {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+    }
+    .gallery-item:nth-child(5) {
+      background: linear-gradient(135deg, #4a1942 0%, #7e1d6e 50%, #a21caf 100%);
+    }
+    .gallery-item:nth-child(6) {
+      background: linear-gradient(135deg, #3b2700 0%, #854d0e 50%, #ca8a04 100%);
+    }
+
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 40% 40%, rgba(255,255,255,0.08) 0%, transparent 70%);
+    }
+
+    .gallery-item-label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+
+    .gallery-footer {
+      text-align: center;
+      margin-top: 32px;
+    }
+    .gallery-footer a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--amber);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .gallery-footer a:hover { color: var(--amber-light); }
+    .gallery-footer p {
+      margin-top: 6px;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* ──────────────────────────────────────────────
+       FOOTER
+    ────────────────────────────────────────────── */
+    #footer {
+      background: #111110;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 72px 0 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+    .footer-brand .footer-logo span { color: var(--amber); }
+
+    .footer-brand p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 280px;
+      margin-bottom: 24px;
+    }
+
+    .footer-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 18px;
+    }
+
+    .footer-col p,
+    .footer-col address {
+      font-style: normal;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .footer-col a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--amber); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8125rem;
+      transition: color 0.2s;
+    }
+    .footer-bottom a:hover { color: var(--amber); }
+
+    .powered-by {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+    .powered-by a {
+      color: var(--amber);
+      text-decoration: none;
+    }
+    .powered-by a:hover { color: var(--amber-light); }
+
+    /* ──────────────────────────────────────────────
+       RESPONSIVE
+    ────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .reservations-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .press-inner { flex-direction: column; }
+      .press-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 24px; }
+      .press-item:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .tabs { flex-direction: column; }
+      .tab-btn { text-align: center; }
+      .modal { padding: 36px 24px; }
+      .res-form { padding: 28px 20px; }
+      .cart-label { font-size: 0.8125rem; }
+    }
+
+    @media (max-width: 400px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">EMBER <span>&</span> OAK</a>
+    <ul class="nav-links">
+      <li><a href="https://demo.trackt.tech" class="portfolio-link">← Back to Portfolio</a></li>
+      <li><a href="#order">Menu</a></li>
+      <li><a href="#order">Order Online</a></li>
+      <li><a href="#reservations">Reservations</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#order" class="nav-cta">Order Online</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="https://demo.trackt.tech">← Back to Portfolio</a>
+    <a href="#order" onclick="closeMobileMenu()">Menu</a>
+    <a href="#order" onclick="closeMobileMenu()">Order Online</a>
+    <a href="#reservations" onclick="closeMobileMenu()">Reservations</a>
+    <a href="#about" onclick="closeMobileMenu()">About</a>
+    <a href="#order" class="mob-cta" onclick="closeMobileMenu()">Order Online</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up">EST. 2019 · YBOR CITY, TAMPA</div>
+    <h1 class="hero-title fade-up delay-1">
+      Wood-Fired.<br><em>Farm-Fresh.</em><br>Unforgettable.
+    </h1>
+    <p class="hero-sub fade-up delay-2">Hand-crafted dishes from local Florida farms, cooked over live oak. Dine in or order online for pickup.</p>
+    <div class="hero-ctas fade-up delay-3">
+      <a href="#order" class="btn btn-amber">Order Online</a>
+      <a href="#reservations" class="btn btn-outline">Reserve a Table</a>
+    </div>
+    <p class="hero-hours fade-up delay-4">
+      Mon–Thu 5–10pm<span>|</span>Fri–Sat 5–11pm<span>|</span>Sun 4–9pm
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     ONLINE ORDERING
+════════════════════════════════════════════ -->
+<section id="order">
+  <div class="container">
+    <div class="order-header fade-up">
+      <p class="section-eyebrow">Order Online</p>
+      <h2 class="section-title">Ready When You Are</h2>
+      <p class="section-desc">Order ahead for pickup — same wood-fired quality, ready in 25 minutes.</p>
+    </div>
+
+    <div class="tabs fade-up delay-1">
+      <button class="tab-btn active" data-tab="starters">Starters</button>
+      <button class="tab-btn" data-tab="mains">Wood-Fired Mains</button>
+      <button class="tab-btn" data-tab="sides">Sides &amp; Salads</button>
+      <button class="tab-btn" data-tab="drinks">Cocktails &amp; Drinks</button>
+    </div>
+
+    <!-- Starters -->
+    <div class="tab-panel active" id="tab-starters">
+      <div class="menu-grid">
+        <div class="menu-card fade-up">
+          <div class="menu-card-top">
+            <h4>Wood-Fired Flatbread</h4>
+            <span class="menu-price">$16</span>
+          </div>
+          <p class="menu-desc">Charred sourdough flatbread with roasted garlic crème, aged provolone, caramelized onions, and fresh thyme from our garden.</p>
+          <button class="add-btn" data-name="Wood-Fired Flatbread" data-price="16">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-1">
+          <div class="menu-card-top">
+            <h4>Burrata &amp; Heirloom Tomato</h4>
+            <span class="menu-price">$14</span>
+          </div>
+          <p class="menu-desc">Hand-pulled burrata, Florida heirloom tomatoes, basil oil, aged balsamic, and Maldon sea salt. Seasonal and simple.</p>
+          <button class="add-btn" data-name="Burrata & Heirloom Tomato" data-price="14">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-2">
+          <div class="menu-card-top">
+            <h4>Charred Shishito Peppers</h4>
+            <span class="menu-price">$11</span>
+          </div>
+          <p class="menu-desc">Blistered over live oak, finished with smoked sea salt, lemon zest, and a housemade calabrian chili aioli.</p>
+          <button class="add-btn" data-name="Charred Shishito Peppers" data-price="11">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-3">
+          <div class="menu-card-top">
+            <h4>Ember-Roasted Bone Marrow</h4>
+            <span class="menu-price">$18</span>
+          </div>
+          <p class="menu-desc">Slow-roasted over white oak embers. Served with grilled sourdough, chimichurri, pickled shallots, and herb salad.</p>
+          <button class="add-btn" data-name="Ember-Roasted Bone Marrow" data-price="18">+ Add</button>
+        </div>
+        <div class="menu-card fade-up">
+          <div class="menu-card-top">
+            <h4>Smoked Duck Liver Mousse</h4>
+            <span class="menu-price">$15</span>
+          </div>
+          <p class="menu-desc">Silky oak-smoked duck mousse, housemade fig jam, crispy crostini, toasted hazelnuts, and micro greens.</p>
+          <button class="add-btn" data-name="Smoked Duck Liver Mousse" data-price="15">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-1">
+          <div class="menu-card-top">
+            <h4>Crispy Calamari</h4>
+            <span class="menu-price">$13</span>
+          </div>
+          <p class="menu-desc">Flash-fried tender calamari, lemon-herb breadcrumbs, roasted pepper romesco, and preserved lemon gremolata.</p>
+          <button class="add-btn" data-name="Crispy Calamari" data-price="13">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mains -->
+    <div class="tab-panel" id="tab-mains">
+      <div class="menu-grid">
+        <div class="menu-card fade-up">
+          <div class="menu-card-top">
+            <h4>Oak-Grilled Ribeye 12oz</h4>
+            <span class="menu-price">$48</span>
+          </div>
+          <p class="menu-desc">Prime dry-aged Florida beef, finished with compound herb butter, roasted garlic, and fresh horseradish. Served with house jus.</p>
+          <button class="add-btn" data-name="Oak-Grilled Ribeye 12oz" data-price="48">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-1">
+          <div class="menu-card-top">
+            <h4>Pan-Seared Gulf Salmon</h4>
+            <span class="menu-price">$34</span>
+          </div>
+          <p class="menu-desc">Wild-caught Gulf Coast salmon, crispy skin, saffron beurre blanc, charred fennel, and a citrus-caper salsa verde.</p>
+          <button class="add-btn" data-name="Pan-Seared Gulf Salmon" data-price="34">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-2">
+          <div class="menu-card-top">
+            <h4>Roasted Half Chicken</h4>
+            <span class="menu-price">$28</span>
+          </div>
+          <p class="menu-desc">Local free-range chicken, wood-fired under a brick, herb-brined overnight, served with roasted root vegetables and pan jus.</p>
+          <button class="add-btn" data-name="Roasted Half Chicken" data-price="28">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-3">
+          <div class="menu-card-top">
+            <h4>Wild Mushroom Risotto</h4>
+            <span class="menu-price">$26</span>
+          </div>
+          <p class="menu-desc">Carnaroli risotto, Florida forest mushrooms, aged Parmigiano-Reggiano, truffle oil, and crispy sage. Vegetarian.</p>
+          <button class="add-btn" data-name="Wild Mushroom Risotto" data-price="26">+ Add</button>
+        </div>
+        <div class="menu-card fade-up">
+          <div class="menu-card-top">
+            <h4>Short Rib Pappardelle</h4>
+            <span class="menu-price">$32</span>
+          </div>
+          <p class="menu-desc">48-hour braised beef short rib, housemade pappardelle, San Marzano tomato sugo, gremolata, and aged ricotta salata.</p>
+          <button class="add-btn" data-name="Short Rib Pappardelle" data-price="32">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-1">
+          <div class="menu-card-top">
+            <h4>Ember-Roasted Whole Fish</h4>
+            <span class="menu-price">$38</span>
+          </div>
+          <p class="menu-desc">Market fish of the day, slow-roasted whole over embers, with charred lemon, fresh herbs, olive oil, and grilled seasonal greens.</p>
+          <button class="add-btn" data-name="Ember-Roasted Whole Fish" data-price="38">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sides -->
+    <div class="tab-panel" id="tab-sides">
+      <div class="menu-grid">
+        <div class="menu-card fade-up">
+          <div class="menu-card-top">
+            <h4>Truffle Fries</h4>
+            <span class="menu-price">$9</span>
+          </div>
+          <p class="menu-desc">Double-fried russet potato fries, white truffle oil, Parmigiano, fresh herbs, and roasted garlic aioli.</p>
+          <button class="add-btn" data-name="Truffle Fries" data-price="9">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-1">
+          <div class="menu-card-top">
+            <h4>Roasted Seasonal Vegetables</h4>
+            <span class="menu-price">$8</span>
+          </div>
+          <p class="menu-desc">Wood-fire roasted local farm vegetables, changing daily. Finished with aged sherry vinegar and toasted pepitas. Vegan.</p>
+          <button class="add-btn" data-name="Roasted Seasonal Vegetables" data-price="8">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-2">
+          <div class="menu-card-top">
+            <h4>Whipped Sweet Potato</h4>
+            <span class="menu-price">$7</span>
+          </div>
+          <p class="menu-desc">Florida sweet potato, whipped with cultured butter, smoked maple, a pinch of cayenne, and crispy sage leaves.</p>
+          <button class="add-btn" data-name="Whipped Sweet Potato" data-price="7">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-3">
+          <div class="menu-card-top">
+            <h4>House Salad</h4>
+            <span class="menu-price">$10</span>
+          </div>
+          <p class="menu-desc">Local hydroponic greens, shaved radish, cucumber ribbons, toasted seeds, and house champagne-shallot vinaigrette.</p>
+          <button class="add-btn" data-name="House Salad" data-price="10">+ Add</button>
+        </div>
+        <div class="menu-card fade-up">
+          <div class="menu-card-top">
+            <h4>Charred Broccolini</h4>
+            <span class="menu-price">$8</span>
+          </div>
+          <p class="menu-desc">Wood-fired broccolini, roasted until crispy at the tips, with garlic, chili flakes, lemon, and shaved Pecorino Romano.</p>
+          <button class="add-btn" data-name="Charred Broccolini" data-price="8">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-1">
+          <div class="menu-card-top">
+            <h4>Caesar Wedge</h4>
+            <span class="menu-price">$11</span>
+          </div>
+          <p class="menu-desc">Baby romaine wedge, house Caesar dressing, house-made anchovy breadcrumbs, shaved Grana Padano, and soft-poached egg.</p>
+          <button class="add-btn" data-name="Caesar Wedge" data-price="11">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drinks -->
+    <div class="tab-panel" id="tab-drinks">
+      <div class="menu-grid">
+        <div class="menu-card fade-up">
+          <div class="menu-card-top">
+            <h4>House Old Fashioned</h4>
+            <span class="menu-price">$14</span>
+          </div>
+          <p class="menu-desc">Buffalo Trace bourbon, oak-smoked simple syrup, Angostura bitters, expressed orange peel. Served over hand-chipped ice.</p>
+          <button class="add-btn" data-name="House Old Fashioned" data-price="14">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-1">
+          <div class="menu-card-top">
+            <h4>Ember Smash</h4>
+            <span class="menu-price">$13</span>
+          </div>
+          <p class="menu-desc">Woodford Reserve rye, charred lemon juice, honey-ginger syrup, fresh mint, and a smoked rosemary sprig garnish.</p>
+          <button class="add-btn" data-name="Ember Smash" data-price="13">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-2">
+          <div class="menu-card-top">
+            <h4>Local Craft Beer</h4>
+            <span class="menu-price">$8</span>
+          </div>
+          <p class="menu-desc">Rotating selection of Tampa Bay craft breweries — Cigar City, Angry Chair, and more. Ask about today's drafts.</p>
+          <button class="add-btn" data-name="Local Craft Beer" data-price="8">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-3">
+          <div class="menu-card-top">
+            <h4>Natural Wine</h4>
+            <span class="menu-price">$12</span>
+          </div>
+          <p class="menu-desc">Rotating selection of small-producer natural wines. Our sommelier chooses weekly pours highlighting biodynamic and low-intervention winemakers.</p>
+          <button class="add-btn" data-name="Natural Wine" data-price="12">+ Add</button>
+        </div>
+        <div class="menu-card fade-up">
+          <div class="menu-card-top">
+            <h4>Burnt Orange Negroni</h4>
+            <span class="menu-price">$14</span>
+          </div>
+          <p class="menu-desc">Broker's gin, Campari, sweet vermouth, hand-torched orange peel. A house signature, served up with a charred citrus aroma.</p>
+          <button class="add-btn" data-name="Burnt Orange Negroni" data-price="14">+ Add</button>
+        </div>
+        <div class="menu-card fade-up delay-1">
+          <div class="menu-card-top">
+            <h4>Seedlip Garden Spritz</h4>
+            <span class="menu-price">$10</span>
+          </div>
+          <p class="menu-desc">Seedlip Garden non-alcoholic spirit, elderflower tonic, cucumber, fresh herbs, and a squeeze of Florida lime. Zero-proof.</p>
+          <button class="add-btn" data-name="Seedlip Garden Spritz" data-price="10">+ Add</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- /container -->
+</section>
+
+<!-- Cart Bar -->
+<div id="cart-bar">
+  <div class="cart-info">
+    <div class="cart-icon" id="cart-count">0</div>
+    <div>
+      <div class="cart-label">Your Order</div>
+      <div class="cart-total" id="cart-total">$0.00</div>
+    </div>
+  </div>
+  <button class="checkout-btn" id="checkout-btn">
+    Checkout &rarr;
+  </button>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <div class="modal-icon">&#10003;</div>
+    <h3>Order Placed!</h3>
+    <p>We have your order and our kitchen is firing it up now.</p>
+    <div class="modal-meta">
+      Ready for pickup in approximately <strong>25 minutes</strong>.<br />
+      1801 E 7th Ave, Tampa FL 33605
+    </div>
+    <button class="modal-btn" id="modal-done">Done</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     RESERVATIONS
+════════════════════════════════════════════ -->
+<section id="reservations">
+  <div class="container">
+    <div class="reservations-inner">
+      <div class="res-info fade-up">
+        <p class="section-eyebrow">Reserve a Table</p>
+        <h2 class="section-title">Join Us for Dinner</h2>
+        <p>We'd love to have you. Reservations are held for 15 minutes past the booking time. For parties larger than 8, please call us directly.</p>
+        <div class="res-detail">
+          <div class="res-detail-item">
+            <div class="res-detail-icon">&#128205;</div>
+            <div class="res-detail-text">
+              <strong>Location</strong>
+              1801 E 7th Ave, Ybor City, Tampa, FL 33605
+            </div>
+          </div>
+          <div class="res-detail-item">
+            <div class="res-detail-icon">&#128222;</div>
+            <div class="res-detail-text">
+              <strong>Phone</strong>
+              (813) 555-0192
+            </div>
+          </div>
+          <div class="res-detail-item">
+            <div class="res-detail-icon">&#128336;</div>
+            <div class="res-detail-text">
+              <strong>Hours</strong>
+              Mon–Thu: 5–10pm &nbsp;|&nbsp; Fri–Sat: 5–11pm &nbsp;|&nbsp; Sun: 4–9pm
+            </div>
+          </div>
+          <div class="res-detail-item">
+            <div class="res-detail-icon">&#128522;</div>
+            <div class="res-detail-text">
+              <strong>Policy</strong>
+              We welcome walk-ins based on availability. Happy hour 5–6:30pm daily.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up delay-2">
+        <div class="res-form">
+          <h3>Book a Table</h3>
+          <form id="res-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="res-name">Full Name *</label>
+                <input type="text" id="res-name" placeholder="Jane Smith" required />
+              </div>
+              <div class="form-group">
+                <label for="res-email">Email *</label>
+                <input type="email" id="res-email" placeholder="jane@email.com" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="res-phone">Phone *</label>
+                <input type="tel" id="res-phone" placeholder="(813) 555-0000" required />
+              </div>
+              <div class="form-group">
+                <label for="res-party">Party Size *</label>
+                <select id="res-party" required>
+                  <option value="">Select…</option>
+                  <option>1 guest</option>
+                  <option>2 guests</option>
+                  <option>3 guests</option>
+                  <option>4 guests</option>
+                  <option>5 guests</option>
+                  <option>6 guests</option>
+                  <option>7 guests</option>
+                  <option>8 guests</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="res-date">Preferred Date *</label>
+                <input type="date" id="res-date" required />
+              </div>
+              <div class="form-group">
+                <label for="res-time">Preferred Time *</label>
+                <select id="res-time" required>
+                  <option value="">Select…</option>
+                  <option>5:00 PM</option>
+                  <option>5:30 PM</option>
+                  <option>6:00 PM</option>
+                  <option>6:30 PM</option>
+                  <option>7:00 PM</option>
+                  <option>7:30 PM</option>
+                  <option>8:00 PM</option>
+                  <option>8:30 PM</option>
+                  <option>9:00 PM</option>
+                  <option>9:30 PM</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="res-requests">Special Requests</label>
+              <textarea id="res-requests" placeholder="Allergies, celebrations, seating preferences…"></textarea>
+            </div>
+            <button type="submit" class="form-submit">Confirm Reservation</button>
+          </form>
+          <div class="form-success" id="form-success">
+            <p>&#10003; Reservation confirmed! Check your email for details. We look forward to seeing you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-up">
+        <div class="about-pull-quote">
+          We believe great food starts before the kitchen.
+          <strong>— Chef Mateo Rivera, Executive Chef &amp; Founder</strong>
+        </div>
+      </div>
+      <div class="about-right fade-up delay-2">
+        <div class="about-photo">
+          <div class="about-photo-label">
+            <span>Our Story</span>
+            <small>Est. 2019 · Ybor City</small>
+          </div>
+        </div>
+        <div class="about-text">
+          <p>Ember &amp; Oak was born from a simple conviction: that the best restaurants in the world trace their excellence back to the soil. We source directly from over a dozen Florida farms within 150 miles — produce picked at peak, delivered the same morning it hits your plate.</p>
+          <p>Chef Mateo Rivera trained in San Sebastián before returning to his Tampa roots. He brought the discipline of European technique and applied it to the flavors he grew up with — the citrus, the Gulf seafood, the spice of Ybor City. The result is a menu that feels both refined and deeply personal.</p>
+          <p>At the heart of our kitchen burns a live white oak fire. Every dish passes through its heat — whether it's a slow roast, a quick char, or a gentle smoke. The fire is not a gimmick. It is the kitchen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     PRESS / AWARDS
+════════════════════════════════════════════ -->
+<div id="press">
+  <div class="press-inner">
+    <div class="press-item fade-up">
+      <p class="press-award">"Best New Restaurant 2022"</p>
+      <p class="press-source">Creative Loafing Tampa</p>
+    </div>
+    <div class="press-item fade-up delay-1">
+      <p class="press-award">"Top 10 Restaurants in Tampa Bay"</p>
+      <p class="press-source">Tampa Bay Times</p>
+    </div>
+    <div class="press-item fade-up delay-2">
+      <p class="press-award">Michelin Recommended 2024</p>
+      <p class="press-source">Michelin Guide Florida</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     GALLERY
+════════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="container">
+    <div class="gallery-header fade-up">
+      <p class="section-eyebrow">Follow the Fire</p>
+      <h2 class="section-title">From Our Table to Yours</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item fade-up">
+        <div class="gallery-item-label">Oak-Grilled Ribeye</div>
+      </div>
+      <div class="gallery-item fade-up delay-1">
+        <div class="gallery-item-label">Garden Sourcing</div>
+      </div>
+      <div class="gallery-item fade-up delay-2">
+        <div class="gallery-item-label">Live Fire Kitchen</div>
+      </div>
+      <div class="gallery-item fade-up delay-3">
+        <div class="gallery-item-label">Intimate Dining Room</div>
+      </div>
+      <div class="gallery-item fade-up">
+        <div class="gallery-item-label">Craft Cocktails</div>
+      </div>
+      <div class="gallery-item fade-up delay-1">
+        <div class="gallery-item-label">Ember-Roasted Bone Marrow</div>
+      </div>
+    </div>
+    <div class="gallery-footer fade-up delay-2">
+      <a href="https://instagram.com/emberandoak" target="_blank" rel="noopener">@emberandoak</a>
+      <p>Follow us on Instagram for behind-the-scenes and daily specials</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand fade-up">
+        <div class="footer-logo">EMBER <span>&</span> OAK</div>
+        <p>Wood-fired cuisine made with Florida's finest ingredients. Rooted in Ybor City. Obsessed with the craft.</p>
+        <div class="footer-ctas">
+          <a href="#order" class="btn btn-amber" style="padding:10px 20px;font-size:0.75rem;">Order Online</a>
+          <a href="#reservations" class="btn btn-outline" style="padding:10px 20px;font-size:0.75rem;">Reserve</a>
+        </div>
+      </div>
+      <div class="footer-col fade-up delay-1">
+        <h4>Visit Us</h4>
+        <address>
+          1801 E 7th Ave<br />
+          Tampa, FL 33605<br />
+          Ybor City<br /><br />
+          <a href="tel:+18135550192">(813) 555-0192</a><br />
+          <a href="mailto:hello@emberandoak.com">hello@emberandoak.com</a>
+        </address>
+      </div>
+      <div class="footer-col fade-up delay-2">
+        <h4>Hours</h4>
+        <p>
+          Mon–Thu &nbsp; 5:00 – 10:00 PM<br />
+          Friday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5:00 – 11:00 PM<br />
+          Saturday &nbsp; 5:00 – 11:00 PM<br />
+          Sunday &nbsp;&nbsp;&nbsp; 4:00 – 9:00 PM<br />
+          <br />
+          Happy Hour daily 5–6:30 PM
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Ember &amp; Oak. All rights reserved.</p>
+      <p class="powered-by">
+        Demo site by <a href="https://trackt.tech" target="_blank" rel="noopener">Trackt Tech</a> &mdash; <a href="https://demo.trackt.tech" target="_blank" rel="noopener">&larr; Back to Portfolio</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  /* ─────────────────────────────────────────
+     MOBILE NAV
+  ───────────────────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  function closeMobileMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  /* ─────────────────────────────────────────
+     SMOOTH SCROLL FOR ALL ANCHOR LINKS
+  ───────────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        closeMobileMenu();
+        window.scrollTo({ top: target.offsetTop - 68, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ─────────────────────────────────────────
+     FADE-IN ON SCROLL (IntersectionObserver)
+  ───────────────────────────────────────── */
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach(el => observer.observe(el));
+
+  /* ─────────────────────────────────────────
+     TAB SWITCHING
+  ───────────────────────────────────────── */
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel = document.getElementById('tab-' + target);
+      if (panel) panel.classList.add('active');
+    });
+  });
+
+  /* ─────────────────────────────────────────
+     CART
+  ───────────────────────────────────────── */
+  let cartItems = 0;
+  let cartTotal = 0;
+  const cartBar = document.getElementById('cart-bar');
+  const cartCountEl = document.getElementById('cart-count');
+  const cartTotalEl = document.getElementById('cart-total');
+
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const price = parseFloat(btn.dataset.price);
+      cartItems += 1;
+      cartTotal += price;
+      cartCountEl.textContent = cartItems;
+      cartTotalEl.textContent = '$' + cartTotal.toFixed(2);
+      cartBar.classList.add('visible');
+
+      // Button feedback
+      const orig = btn.textContent;
+      btn.textContent = '✓ Added';
+      btn.classList.add('added');
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.classList.remove('added');
+      }, 1200);
+    });
+  });
+
+  /* ─────────────────────────────────────────
+     CHECKOUT MODAL
+  ───────────────────────────────────────── */
+  const checkoutBtn = document.getElementById('checkout-btn');
+  const modal = document.getElementById('checkout-modal');
+  const modalClose = document.getElementById('modal-close');
+  const modalDone = document.getElementById('modal-done');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    // Reset cart
+    cartItems = 0;
+    cartTotal = 0;
+    cartCountEl.textContent = '0';
+    cartTotalEl.textContent = '$0.00';
+    cartBar.classList.remove('visible');
+  }
+
+  checkoutBtn.addEventListener('click', openModal);
+  modalClose.addEventListener('click', closeModal);
+  modalDone.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+  /* ─────────────────────────────────────────
+     RESERVATION FORM
+  ───────────────────────────────────────── */
+  const resForm = document.getElementById('res-form');
+  const formSuccess = document.getElementById('form-success');
+
+  resForm.addEventListener('submit', e => {
+    e.preventDefault();
+    let valid = true;
+
+    const required = resForm.querySelectorAll('[required]');
+    required.forEach(field => {
+      field.classList.remove('error');
+      if (!field.value.trim()) {
+        field.classList.add('error');
+        valid = false;
+      }
+    });
+
+    if (!valid) {
+      const firstError = resForm.querySelector('.error');
+      if (firstError) firstError.focus();
+      return;
+    }
+
+    // Simulate success
+    resForm.style.display = 'none';
+    formSuccess.classList.add('show');
+  });
+
+  // Remove error state on input
+  resForm.querySelectorAll('input, select, textarea').forEach(field => {
+    field.addEventListener('input', () => field.classList.remove('error'));
+    field.addEventListener('change', () => field.classList.remove('error'));
+  });
+
+  // Set min date for reservation date picker
+  const dateInput = document.getElementById('res-date');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+  }
+</script>
+
+</body>
+</html>

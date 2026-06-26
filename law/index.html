@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Meridian Legal Group — Tampa's Proven Trial Attorneys</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-deep: #0f172a;
+      --navy-mid: #1e293b;
+      --navy-light: #334155;
+      --gold: #c9a84c;
+      --gold-light: #d4b96a;
+      --gold-pale: rgba(201,168,76,0.12);
+      --text-light: #cbd5e1;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      --bg-light: #f8fafc;
+      --white: #ffffff;
+      --success: #10b981;
+      --error: #ef4444;
+      --radius: 8px;
+      --radius-lg: 14px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.18);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.28);
+      --transition: 0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy-deep);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.2;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { display: block; max-width: 100%; }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===================== ANIMATIONS ===================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up-delay-1 { transition-delay: 0.1s; }
+    .fade-up-delay-2 { transition-delay: 0.2s; }
+    .fade-up-delay-3 { transition-delay: 0.3s; }
+    .fade-up-delay-4 { transition-delay: 0.4s; }
+
+    /* ===================== NAV ===================== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(15,23,42,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      gap: 2px;
+    }
+    .nav-logo .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.12em;
+    }
+    .nav-logo .logo-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: color var(--transition);
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .nav-back {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--transition);
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back svg { width: 14px; height: 14px; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy-deep);
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .btn-gold:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--gold);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .btn-outline:hover {
+      background: var(--gold-pale);
+      transform: translateY(-1px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-light);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 20px 24px 28px;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; }
+    .mobile-menu ul li { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mobile-menu ul li a {
+      display: block;
+      padding: 14px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: color var(--transition);
+    }
+    .mobile-menu ul li a:hover { color: var(--gold); }
+    .mobile-menu .mobile-cta {
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+      padding: 13px 20px;
+      font-size: 15px;
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--navy-deep);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -120px;
+      left: -160px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      padding: 80px 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-pale);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 24px;
+      line-height: 1.08;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-light);
+      max-width: 580px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .hero-ctas .btn-gold { font-size: 15px; padding: 14px 28px; }
+    .hero-ctas .btn-outline { font-size: 15px; padding: 14px 28px; }
+
+    .hero-stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      background: rgba(30,41,59,0.8);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 100px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .stat-pill .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-pill .stat-label {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    /* ===================== TRUST BAR ===================== */
+    .trust-bar {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 20px 0;
+    }
+
+    .trust-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+    .trust-check {
+      width: 20px;
+      height: 20px;
+      background: var(--gold-pale);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ===================== PRACTICE AREAS ===================== */
+    .section-light {
+      background: var(--bg-light);
+      color: var(--navy-mid);
+      padding: 96px 0;
+    }
+
+    .section-dark {
+      background: var(--navy-deep);
+      color: var(--text-light);
+      padding: 96px 0;
+    }
+
+    .section-mid {
+      background: var(--navy-mid);
+      color: var(--text-light);
+      padding: 96px 0;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .section-light .section-title { color: var(--navy-mid); }
+    .section-dark .section-title,
+    .section-mid .section-title { color: var(--white); }
+
+    .section-desc {
+      font-size: 16px;
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
+    .section-light .section-desc { color: #475569; }
+    .section-dark .section-desc,
+    .section-mid .section-desc { color: var(--text-light); }
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .practice-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      border: 1px solid #e2e8f0;
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+      cursor: default;
+    }
+    .practice-card:hover {
+      box-shadow: 0 16px 48px rgba(15,23,42,0.1);
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.4);
+    }
+
+    .practice-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(201,168,76,0.1);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .practice-icon svg { width: 26px; height: 26px; color: var(--gold); }
+
+    .practice-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy-mid);
+      margin-bottom: 10px;
+    }
+
+    .practice-card p {
+      font-size: 14px;
+      color: #475569;
+      margin-bottom: 20px;
+      line-height: 1.65;
+    }
+
+    .practice-link {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--transition);
+    }
+    .practice-link:hover { gap: 10px; }
+
+    /* ===================== RESULTS ===================== */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .result-card {
+      background: rgba(30,41,59,0.6);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+    .result-card:hover {
+      border-color: rgba(201,168,76,0.45);
+      background: rgba(30,41,59,0.85);
+      transform: translateY(-3px);
+    }
+
+    .result-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .result-type {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .result-year {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .result-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .results-disclaimer {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px;
+      font-style: italic;
+    }
+
+    /* ===================== ATTORNEYS ===================== */
+    .attorneys-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .attorney-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .attorney-card:hover {
+      box-shadow: 0 20px 60px rgba(15,23,42,0.12);
+      transform: translateY(-4px);
+    }
+
+    .attorney-photo {
+      height: 220px;
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-light) 50%, #1a2744 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .attorney-photo::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(15,23,42,0.5), transparent);
+    }
+
+    .attorney-initials {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: rgba(201,168,76,0.35);
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+
+    .attorney-body {
+      padding: 24px;
+    }
+
+    .attorney-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy-mid);
+      margin-bottom: 4px;
+    }
+
+    .attorney-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .attorney-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .credential-tag {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      color: #64748b;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .attorney-card p {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.65;
+    }
+
+    /* ===================== FORM ===================== */
+    .form-section {
+      background: var(--navy-mid);
+      padding: 96px 0;
+    }
+
+    .form-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .form-left h2 {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .form-left p {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .form-guarantee {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .guarantee-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .guarantee-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .guarantee-item p {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin: 0;
+    }
+
+    .consultation-form {
+      background: rgba(15,23,42,0.5);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 7px;
+      letter-spacing: 0.03em;
+    }
+    .form-group label .req { color: var(--gold); margin-left: 2px; }
+
+    .form-control {
+      width: 100%;
+      background: rgba(15,23,42,0.6);
+      border: 1.5px solid rgba(71,85,105,0.5);
+      border-radius: var(--radius);
+      padding: 11px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--white);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      appearance: none;
+    }
+    .form-control::placeholder { color: var(--text-muted); }
+    .form-control:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .form-control.error { border-color: var(--error); box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
+
+    select.form-control option { background: var(--navy-mid); color: var(--white); }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-top: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .form-success.show { display: block; }
+    .form-success .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(16,185,129,0.12);
+      border: 2px solid var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+    }
+    .form-success h3 {
+      font-size: 26px;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .form-success p { font-size: 15px; color: var(--text-dim); }
+
+    /* ===================== TESTIMONIALS ===================== */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: rgba(30,41,59,0.6);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .testimonial-card:hover {
+      border-color: rgba(201,168,76,0.25);
+      transform: translateY(-3px);
+    }
+
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-card p {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.72;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+    .star {
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+      border: 1.5px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .author-info .name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .author-info .case-type {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ===================== FAQ ===================== */
+    .faq-list {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      cursor: pointer;
+      user-select: none;
+      gap: 20px;
+    }
+
+    .faq-question span {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--white);
+      transition: color var(--transition);
+      line-height: 1.4;
+    }
+    .faq-question:hover span { color: var(--gold-light); }
+
+    .faq-arrow {
+      width: 28px;
+      height: 28px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .faq-arrow svg {
+      width: 14px;
+      height: 14px;
+      color: var(--gold);
+      transition: transform var(--transition);
+    }
+    .faq-item.open .faq-arrow { background: rgba(201,168,76,0.2); }
+    .faq-item.open .faq-arrow svg { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding-bottom: 22px;
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.75;
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: #07101f;
+      border-top: 1px solid rgba(201,168,76,0.12);
+      padding: 72px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand .footer-logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.1em;
+    }
+    .footer-brand .footer-logo-sub {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .footer-contact-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .footer-contact-item span {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .footer-contact-item a {
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .footer-contact-item a:hover { color: var(--gold); }
+
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--text-light); }
+
+    .footer-hours p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .footer-hours strong { color: var(--text-dim); font-weight: 500; }
+
+    .footer-hours .emergency {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 100px;
+      padding: 6px 12px;
+      font-size: 12.5px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .footer-hours .emergency::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .footer-cta-box {
+      background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.05));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .footer-cta-box h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      letter-spacing: 0;
+    }
+    .footer-cta-box p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .footer-cta-box .btn-gold { width: 100%; text-align: center; display: block; padding: 12px 20px; font-size: 14px; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===================== DIVIDER ===================== */
+    .gold-divider {
+      width: 56px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 1024px) {
+      .practice-grid { grid-template-columns: repeat(2, 1fr); }
+      .attorneys-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .nav-back,
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-stats { gap: 10px; }
+      .stat-pill { padding: 8px 14px; }
+
+      .trust-items { gap: 16px; justify-content: flex-start; }
+      .trust-item { font-size: 12.5px; }
+
+      .practice-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+      .attorneys-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+
+      .form-wrapper { grid-template-columns: 1fr; gap: 36px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      .section-light,
+      .section-dark,
+      .section-mid,
+      .form-section { padding: 64px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn-gold,
+      .hero-ctas .btn-outline { text-align: center; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <nav id="main-nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo" aria-label="Meridian Legal Group">
+        <span class="logo-main">MERIDIAN</span>
+        <span class="logo-sub">Legal Group</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#practice-areas">Practice Areas</a></li>
+        <li><a href="#attorneys">Our Attorneys</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a href="https://demo.trackt.tech" class="nav-back" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Back to Portfolio
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-right">
+        <a href="#contact" class="btn-gold nav-cta">Free Consultation</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" role="navigation" aria-hidden="true">
+      <ul>
+        <li><a href="#practice-areas" class="mobile-nav-link">Practice Areas</a></li>
+        <li><a href="#attorneys" class="mobile-nav-link">Our Attorneys</a></li>
+        <li><a href="#results" class="mobile-nav-link">Results</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        <li><a href="https://demo.trackt.tech" target="_blank" rel="noopener" class="mobile-nav-link" style="color: var(--text-muted); font-size:13px;">← Back to Portfolio</a></li>
+      </ul>
+      <a href="#contact" class="btn-gold mobile-cta mobile-nav-link">Free Consultation</a>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge fade-up">TAMPA, FL &nbsp;·&nbsp; EST. 2008</div>
+        <h1 class="fade-up fade-up-delay-1">When It Matters Most,<br /><em>Experience Wins.</em></h1>
+        <p class="hero-sub fade-up fade-up-delay-2">
+          Our trial attorneys have recovered over $50 million for Tampa Bay families and businesses.
+          No fee unless we win — your first consultation is always free.
+        </p>
+        <div class="hero-ctas fade-up fade-up-delay-3">
+          <a href="#contact" class="btn-gold">Free Consultation</a>
+          <a href="#results" class="btn-outline">See Our Results</a>
+        </div>
+        <div class="hero-stats fade-up fade-up-delay-4">
+          <div class="stat-pill">
+            <span class="stat-value">$50M+</span>
+            <span class="stat-label">Recovered</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-value">97%</span>
+            <span class="stat-label">Case Success Rate</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-value">1,200+</span>
+            <span class="stat-label">Clients Helped</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRUST BAR ===================== -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-items">
+        <div class="trust-item fade-up">
+          <div class="trust-check">✓</div>
+          No Fee Unless You Win
+        </div>
+        <div class="trust-item fade-up fade-up-delay-1">
+          <div class="trust-check">✓</div>
+          Free Confidential Consultation
+        </div>
+        <div class="trust-item fade-up fade-up-delay-2">
+          <div class="trust-check">✓</div>
+          Available 24/7
+        </div>
+        <div class="trust-item fade-up fade-up-delay-3">
+          <div class="trust-check">✓</div>
+          15+ Years Tampa Experience
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PRACTICE AREAS ===================== -->
+  <section class="section-light" id="practice-areas">
+    <div class="container">
+      <p class="section-label fade-up">What We Do</p>
+      <div class="gold-divider fade-up"></div>
+      <h2 class="section-title fade-up">Practice Areas</h2>
+      <p class="section-desc fade-up">
+        Meridian Legal Group handles a wide range of civil and litigation matters across Tampa Bay.
+        Each case receives the full attention of an experienced trial attorney.
+      </p>
+      <div class="practice-grid">
+
+        <!-- Personal Injury -->
+        <div class="practice-card fade-up">
+          <div class="practice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h3>Personal Injury</h3>
+          <p>We fight aggressively for victims of auto accidents, slip &amp; falls, and wrongful death. You focus on healing — we handle the legal battle.</p>
+          <a href="#contact" class="practice-link">Schedule a Free Consultation →</a>
+        </div>
+
+        <!-- Business Litigation -->
+        <div class="practice-card fade-up fade-up-delay-1">
+          <div class="practice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+          </div>
+          <h3>Business Litigation</h3>
+          <p>Contract disputes, partnership disagreements, and business fraud require decisive legal action. We protect your interests in and out of court.</p>
+          <a href="#contact" class="practice-link">Schedule a Free Consultation →</a>
+        </div>
+
+        <!-- Family Law -->
+        <div class="practice-card fade-up fade-up-delay-2">
+          <div class="practice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <h3>Family Law</h3>
+          <p>Divorce, child custody, and adoption proceedings handled with compassion and strategy. We help protect what matters most — your family.</p>
+          <a href="#contact" class="practice-link">Schedule a Free Consultation →</a>
+        </div>
+
+        <!-- Real Estate Law -->
+        <div class="practice-card fade-up fade-up-delay-1">
+          <div class="practice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="3 11 12 2 21 11"/><polyline points="9 22 9 12 15 12 15 22"/><line x1="3" y1="11" x2="3" y2="22"/><line x1="21" y1="11" x2="21" y2="22"/>
+            </svg>
+          </div>
+          <h3>Real Estate Law</h3>
+          <p>From closings to property disputes and landlord-tenant matters, our attorneys ensure your real estate transactions and rights are protected.</p>
+          <a href="#contact" class="practice-link">Schedule a Free Consultation →</a>
+        </div>
+
+        <!-- Employment Law -->
+        <div class="practice-card fade-up fade-up-delay-2">
+          <div class="practice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Employment Law</h3>
+          <p>Wrongful termination, workplace discrimination, and unpaid wages demand swift action. Stand up for your workplace rights with Meridian.</p>
+          <a href="#contact" class="practice-link">Schedule a Free Consultation →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CASE RESULTS ===================== -->
+  <section class="section-dark" id="results">
+    <div class="container">
+      <p class="section-label fade-up">Track Record</p>
+      <div class="gold-divider fade-up"></div>
+      <h2 class="section-title fade-up">Proven Results. Real People.</h2>
+      <p class="section-desc fade-up">
+        Every case we take is a commitment to fight until justice is served. Here are a few of the outcomes
+        we've secured for our clients across Tampa Bay.
+      </p>
+      <div class="results-grid">
+
+        <div class="result-card fade-up">
+          <div class="result-amount">$3.2M</div>
+          <div class="result-type">Car Accident Settlement</div>
+          <div class="result-year">2024</div>
+          <p class="result-desc">A Tampa family received full compensation after a commercial truck driver ran a red light, causing severe injuries to two passengers.</p>
+        </div>
+
+        <div class="result-card fade-up fade-up-delay-1">
+          <div class="result-amount">$1.8M</div>
+          <div class="result-type">Slip &amp; Fall Verdict</div>
+          <div class="result-year">2023</div>
+          <p class="result-desc">Jury verdict for a client who suffered a traumatic brain injury after a property owner's negligent failure to address a known hazard.</p>
+        </div>
+
+        <div class="result-card fade-up fade-up-delay-2">
+          <div class="result-amount">$4.1M</div>
+          <div class="result-type">Business Fraud Recovery</div>
+          <div class="result-year">2024</div>
+          <p class="result-desc">Full recovery of fraudulently diverted business assets for a Tampa company whose partner executed a years-long scheme to siphon profits.</p>
+        </div>
+
+        <div class="result-card fade-up fade-up-delay-3">
+          <div class="result-amount">$890K</div>
+          <div class="result-type">Wrongful Termination</div>
+          <div class="result-year">2023</div>
+          <p class="result-desc">Settlement for a senior-level employee terminated in retaliation for reporting discriminatory hiring practices to HR leadership.</p>
+        </div>
+
+      </div>
+      <p class="results-disclaimer fade-up">Past results do not guarantee future outcomes. Each case is unique and results vary depending on the specific facts and legal issues involved.</p>
+    </div>
+  </section>
+
+  <!-- ===================== ATTORNEYS ===================== -->
+  <section class="section-light" id="attorneys">
+    <div class="container">
+      <p class="section-label fade-up">The Team</p>
+      <div class="gold-divider fade-up"></div>
+      <h2 class="section-title fade-up">Our Attorneys</h2>
+      <p class="section-desc fade-up">
+        Led by experienced trial lawyers who have argued cases at every level of Florida's courts.
+        You'll work directly with an attorney — never just a paralegal.
+      </p>
+      <div class="attorneys-grid">
+
+        <!-- James R. Meridian -->
+        <div class="attorney-card fade-up">
+          <div class="attorney-photo">
+            <span class="attorney-initials">JM</span>
+          </div>
+          <div class="attorney-body">
+            <h3>James R. Meridian</h3>
+            <div class="attorney-title">Managing Partner</div>
+            <div class="attorney-credentials">
+              <span class="credential-tag">UF Levin College of Law</span>
+              <span class="credential-tag">20 Years Experience</span>
+              <span class="credential-tag">Personal Injury</span>
+            </div>
+            <p>James founded Meridian Legal Group in 2008 after a decade at one of Florida's largest litigation firms. A board-certified civil trial specialist, he has tried over 80 cases to verdict and is a consistent member of the Florida Super Lawyers list. His philosophy: every client deserves the same standard of representation he would want for his own family.</p>
+          </div>
+        </div>
+
+        <!-- Sarah Chen -->
+        <div class="attorney-card fade-up fade-up-delay-1">
+          <div class="attorney-photo">
+            <span class="attorney-initials">SC</span>
+          </div>
+          <div class="attorney-body">
+            <h3>Sarah Chen</h3>
+            <div class="attorney-title">Senior Associate</div>
+            <div class="attorney-credentials">
+              <span class="credential-tag">Stetson University Law</span>
+              <span class="credential-tag">10 Years Experience</span>
+              <span class="credential-tag">Business Litigation</span>
+            </div>
+            <p>Sarah joined Meridian Legal Group after serving as in-house counsel for a publicly traded Tampa company, giving her rare insight into how businesses think during disputes. She specializes in complex commercial litigation, contract enforcement, and corporate fraud recovery. Clients consistently describe her as methodical, direct, and tenacious in negotiations.</p>
+          </div>
+        </div>
+
+        <!-- Marcus Webb -->
+        <div class="attorney-card fade-up fade-up-delay-2">
+          <div class="attorney-photo">
+            <span class="attorney-initials">MW</span>
+          </div>
+          <div class="attorney-body">
+            <h3>Marcus Webb</h3>
+            <div class="attorney-title">Associate Attorney</div>
+            <div class="attorney-credentials">
+              <span class="credential-tag">USF Morsani Law</span>
+              <span class="credential-tag">6 Years Experience</span>
+              <span class="credential-tag">Family Law</span>
+            </div>
+            <p>Marcus brings compassion and precision to the firm's family law practice. A Tampa native and USF alum, he understands the community he serves. Marcus has successfully resolved hundreds of custody, divorce, and adoption matters, and is known for protecting client interests while minimizing the emotional toll that litigation can take on families.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FORM ===================== -->
+  <section class="form-section" id="contact">
+    <div class="container">
+      <div class="form-wrapper">
+        <div class="form-left fade-up">
+          <p class="section-label">Get Started</p>
+          <div class="gold-divider"></div>
+          <h2>Your First Step<br />is Free.</h2>
+          <p>
+            Tell us about your situation. One of our attorneys will review your case and reach out
+            within 2 hours during business hours — sooner for emergencies.
+          </p>
+          <div class="form-guarantee">
+            <div class="guarantee-item">
+              <div class="guarantee-dot"></div>
+              <p><strong style="color:var(--text-light)">100% Confidential</strong> — everything you share is protected by attorney-client privilege from the first conversation.</p>
+            </div>
+            <div class="guarantee-item">
+              <div class="guarantee-dot"></div>
+              <p><strong style="color:var(--text-light)">No Obligation</strong> — a free consultation is exactly that. No pressure, no commitment required.</p>
+            </div>
+            <div class="guarantee-item">
+              <div class="guarantee-dot"></div>
+              <p><strong style="color:var(--text-light)">No Upfront Costs</strong> — on contingency cases, we only collect a fee if and when we recover for you.</p>
+            </div>
+            <div class="guarantee-item">
+              <div class="guarantee-dot"></div>
+              <p><strong style="color:var(--text-light)">24/7 Emergency Line</strong> — for urgent matters, call us any time at (813) 555-0192.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="consultation-form fade-up fade-up-delay-1">
+          <div id="form-fields">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-name">Full Name <span class="req">*</span></label>
+                <input type="text" id="f-name" class="form-control" placeholder="Jane Smith" required />
+              </div>
+              <div class="form-group">
+                <label for="f-phone">Phone <span class="req">*</span></label>
+                <input type="tel" id="f-phone" class="form-control" placeholder="(813) 555-0100" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="f-email">Email Address <span class="req">*</span></label>
+              <input type="email" id="f-email" class="form-control" placeholder="jane@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="f-case">Case Type <span class="req">*</span></label>
+              <select id="f-case" class="form-control" required>
+                <option value="">Select a practice area…</option>
+                <option value="personal-injury">Personal Injury</option>
+                <option value="business-litigation">Business Litigation</option>
+                <option value="family-law">Family Law</option>
+                <option value="real-estate">Real Estate Law</option>
+                <option value="employment">Employment Law</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-desc">Brief Description of Your Case <span class="req">*</span></label>
+              <textarea id="f-desc" class="form-control" placeholder="Tell us what happened and what kind of help you're looking for…" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="f-source">How did you hear about us?</label>
+              <select id="f-source" class="form-control">
+                <option value="">Select…</option>
+                <option value="google">Google Search</option>
+                <option value="referral">Friend or Family Referral</option>
+                <option value="social">Social Media</option>
+                <option value="billboard">Billboard / Outdoor</option>
+                <option value="radio">Radio</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <button type="button" class="btn-gold form-submit" id="form-submit">
+              Request Free Consultation
+            </button>
+          </div>
+          <div class="form-success" id="form-success">
+            <div class="success-icon">✓</div>
+            <h3>Message Received</h3>
+            <p>Thank you — an attorney will contact you within 2 hours to discuss your case. If this is urgent, please call us directly at <strong style="color:var(--gold)">(813) 555-0192</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="section-dark" id="testimonials">
+    <div class="container">
+      <p class="section-label fade-up">Client Stories</p>
+      <div class="gold-divider fade-up"></div>
+      <h2 class="section-title fade-up">What Our Clients Say</h2>
+      <p class="section-desc fade-up">We measure success not just in dollar amounts, but in the relief our clients feel when justice is served.</p>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>After my car accident, I didn't know where to turn. James and his team explained every step of the process and never made me feel like just another case number. They fought for over a year to get me a fair settlement — and they delivered far beyond what I expected. I genuinely can't thank them enough.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">RD</div>
+            <div class="author-info">
+              <div class="name">Robert D.</div>
+              <div class="case-type">Personal Injury Client</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up fade-up-delay-1">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>Sarah Chen handled my business dispute with remarkable precision. My former partner had been skimming from the company for years and I was devastated. Sarah not only recovered what was taken but secured additional damages I didn't know I was entitled to. Professional, responsive, and absolutely relentless in the courtroom.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">KM</div>
+            <div class="author-info">
+              <div class="name">Karen M.</div>
+              <div class="case-type">Business Litigation Client</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up fade-up-delay-2">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>Going through a custody battle is one of the hardest things I've ever faced. Marcus Webb was my advocate throughout every hearing. He was always reachable, always prepared, and made sure the judge heard my side clearly. My kids are with me now, and I owe that largely to his tireless work on my behalf.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">TL</div>
+            <div class="author-info">
+              <div class="name">Thomas L.</div>
+              <div class="case-type">Family Law Client</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="section-mid" id="faq">
+    <div class="container">
+      <p class="section-label fade-up" style="text-align:center">Common Questions</p>
+      <div class="gold-divider fade-up" style="margin:0 auto 24px"></div>
+      <h2 class="section-title fade-up" style="text-align:center; margin-bottom:16px;">Frequently Asked Questions</h2>
+      <p class="section-desc fade-up" style="text-align:center; margin:0 auto 56px;">
+        Have more questions? Call us at (813) 555-0192 or submit the form above — we're happy to help.
+      </p>
+      <div class="faq-list">
+
+        <div class="faq-item fade-up">
+          <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+            <span>How much does it cost to hire Meridian Legal Group?</span>
+            <div class="faq-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              For most personal injury and employment cases, we work on a contingency fee basis — meaning you pay nothing upfront and our fee is a percentage of the amount we recover for you. If we don't win, you owe us nothing. For business litigation and family law matters, we offer flat-rate and hourly arrangements depending on the scope. We discuss fees clearly at your free consultation so there are never any surprises.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item fade-up fade-up-delay-1">
+          <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+            <span>How long will my case take?</span>
+            <div class="faq-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Case timelines vary widely. Many personal injury cases settle within 6–18 months. Complex business litigation can take 2–3 years if the case proceeds to trial. Family law matters involving custody depend heavily on whether parties can agree or whether full litigation is required. We'll give you an honest timeline estimate at your consultation based on the specifics of your situation, and keep you updated at every stage.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item fade-up fade-up-delay-2">
+          <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+            <span>What should I bring to my consultation?</span>
+            <div class="faq-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Bring whatever you have — don't worry if it's not organized. Helpful documents include any police reports, medical records, contracts, emails, photographs, insurance correspondence, employment documents, or court paperwork related to your situation. If you have nothing on hand yet, that's completely fine. The consultation is about understanding your case, and our team can help gather additional information afterward.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item fade-up fade-up-delay-3">
+          <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+            <span>Do you handle cases outside of Tampa?</span>
+            <div class="faq-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes. While our home is Tampa, we are licensed to practice throughout the state of Florida and regularly handle cases in Hillsborough, Pinellas, Pasco, Sarasota, and Polk counties. For certain types of litigation, we have relationships with co-counsel in other states as well. If you're unsure whether we can help with your specific location, just ask — we'll be straightforward about whether we're the right fit.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item fade-up">
+          <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+            <span>What if I can't afford to pay upfront?</span>
+            <div class="faq-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              For contingency-eligible cases — including most personal injury, wrongful termination, and discrimination claims — you pay nothing until we win. Court costs and case expenses are advanced by the firm and repaid from the settlement. We built our practice this way deliberately, because we believe people shouldn't be priced out of justice. For other case types, we offer flexible payment schedules and will work with you to find a structure that makes sense.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand fade-up">
+          <div class="footer-logo-main">MERIDIAN</div>
+          <div class="footer-logo-sub">Legal Group</div>
+          <p>Tampa's trusted trial attorneys since 2008. Fighting for individuals, families, and businesses across Tampa Bay with experience, strategy, and relentless advocacy.</p>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>4820 Bay Shore Blvd, Suite 310<br />Tampa, FL 33611</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 15.92v1z"/>
+            </svg>
+            <span><a href="tel:+18135550192">(813) 555-0192</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span><a href="mailto:contact@meridianlegal.com">contact@meridianlegal.com</a></span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col fade-up fade-up-delay-1">
+          <h4>Practice Areas</h4>
+          <ul class="footer-links">
+            <li><a href="#practice-areas">Personal Injury</a></li>
+            <li><a href="#practice-areas">Business Litigation</a></li>
+            <li><a href="#practice-areas">Family Law</a></li>
+            <li><a href="#practice-areas">Real Estate Law</a></li>
+            <li><a href="#practice-areas">Employment Law</a></li>
+          </ul>
+        </div>
+
+        <!-- Firm Links -->
+        <div class="footer-col fade-up fade-up-delay-2">
+          <h4>The Firm</h4>
+          <ul class="footer-links">
+            <li><a href="#attorneys">Our Attorneys</a></li>
+            <li><a href="#results">Case Results</a></li>
+            <li><a href="#testimonials">Client Reviews</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Hours + CTA -->
+        <div class="footer-col fade-up fade-up-delay-3">
+          <h4>Office Hours</h4>
+          <div class="footer-hours">
+            <p><strong>Monday – Friday</strong><br />8:00 AM – 7:00 PM</p>
+            <p><strong>Saturday</strong><br />9:00 AM – 2:00 PM</p>
+            <p><strong>Sunday</strong><br />By appointment only</p>
+            <div class="emergency">24/7 Emergency Line</div>
+          </div>
+          <div class="footer-cta-box" style="margin-top:24px">
+            <h4>Ready to Talk?</h4>
+            <p>Get a free case review today. No obligation, no pressure.</p>
+            <a href="#contact" class="btn-gold">Free Consultation</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Meridian Legal Group, P.A. All rights reserved.<br />
+        <span style="font-size:11.5px; color: var(--text-muted); opacity:0.7;">Attorney advertising. Past results do not guarantee future outcomes. This website is for informational purposes only and does not constitute legal advice or create an attorney-client relationship.</span></p>
+        <p style="font-size:11.5px; opacity:0.5;">Site by <a href="https://demo.trackt.tech" style="color:var(--gold); text-decoration:none;">Trackt Tech</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    // ---- HAMBURGER MENU ----
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', function () {
+      const isOpen = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    // ---- INTERSECTION OBSERVER FADE-IN ----
+    const fadeItems = document.querySelectorAll('.fade-up');
+
+    const observerOptions = {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    fadeItems.forEach(function (el) {
+      observer.observe(el);
+    });
+
+    // Mark hero items visible immediately (above fold)
+    document.querySelectorAll('.hero .fade-up').forEach(function (el, i) {
+      setTimeout(function () {
+        el.classList.add('visible');
+      }, 100 + i * 120);
+    });
+
+    // ---- FAQ ACCORDION ----
+    document.querySelectorAll('.faq-question').forEach(function (question) {
+      question.addEventListener('click', function () {
+        const item = question.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+
+        // Close all others
+        document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+          if (openItem !== item) {
+            openItem.classList.remove('open');
+            openItem.querySelector('.faq-answer').style.maxHeight = '0';
+            openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('open');
+          answer.style.maxHeight = '0';
+          question.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 40 + 'px';
+          question.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // Keyboard accessibility
+      question.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          question.click();
+        }
+      });
+    });
+
+    // ---- FORM VALIDATION & SUBMISSION ----
+    const submitBtn = document.getElementById('form-submit');
+    const formSuccess = document.getElementById('form-success');
+    const formFields = document.getElementById('form-fields');
+
+    const requiredFields = [
+      { id: 'f-name', label: 'Full Name' },
+      { id: 'f-phone', label: 'Phone' },
+      { id: 'f-email', label: 'Email' },
+      { id: 'f-case', label: 'Case Type' },
+      { id: 'f-desc', label: 'Description' }
+    ];
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validatePhone(phone) {
+      return /[\d\s\-().+]{7,}/.test(phone);
+    }
+
+    submitBtn.addEventListener('click', function () {
+      let valid = true;
+
+      requiredFields.forEach(function (field) {
+        const el = document.getElementById(field.id);
+        el.classList.remove('error');
+        const val = el.value.trim();
+
+        if (!val) {
+          el.classList.add('error');
+          valid = false;
+          return;
+        }
+
+        if (field.id === 'f-email' && !validateEmail(val)) {
+          el.classList.add('error');
+          valid = false;
+        }
+
+        if (field.id === 'f-phone' && !validatePhone(val)) {
+          el.classList.add('error');
+          valid = false;
+        }
+      });
+
+      if (!valid) {
+        const firstError = formFields.querySelector('.form-control.error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstError.focus();
+        }
+        return;
+      }
+
+      // Success
+      formFields.style.display = 'none';
+      formSuccess.classList.add('show');
+    });
+
+    // Remove error class on input
+    requiredFields.forEach(function (field) {
+      const el = document.getElementById(field.id);
+      el.addEventListener('input', function () {
+        el.classList.remove('error');
+      });
+      el.addEventListener('change', function () {
+        el.classList.remove('error');
+      });
+    });
+
+    // ---- SMOOTH SCROLL OFFSET (for fixed nav) ----
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const navHeight = document.getElementById('main-nav').offsetHeight;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
