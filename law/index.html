@@ -40,7 +40,20 @@
       color: var(--text-light);
       line-height: 1.6;
       overflow-x: hidden;
+      padding-top: 32px;
     }
+
+    /* ── GALLERY BAR ── */
+    #gallery-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 32px; z-index: 99999;
+      background: rgba(15,23,42,0.97); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px; font-family: 'Inter', sans-serif;
+    }
+    #gallery-bar a { display: inline-flex; align-items: center; gap: 5px; color: var(--gold); font-size: 11px; font-weight: 600; text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
+    #gallery-bar a:hover { color: var(--gold-light); }
+    #gallery-bar .label { color: var(--text-muted); font-size: 11px; letter-spacing: 0.3px; }
 
     h1, h2, h3, h4 {
       font-family: 'Cormorant Garamond', serif;
@@ -75,7 +88,7 @@
     /* ===================== NAV ===================== */
     nav {
       position: fixed;
-      top: 0;
+      top: 32px;
       left: 0;
       right: 0;
       z-index: 1000;
@@ -1128,6 +1141,15 @@
   </style>
 </head>
 <body>
+
+  <!-- Gallery bar -->
+  <div id="gallery-bar">
+    <a href="https://demo.trackt.tech">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Back to Gallery
+    </a>
+    <span class="label">Trackt Tech Demo</span>
+  </div>
 
   <!-- ===================== NAV ===================== -->
   <nav id="main-nav">

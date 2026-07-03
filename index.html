@@ -45,11 +45,11 @@
       "name": "Portfolio Demos",
       "itemListElement": [
         {"@type":"ListItem","position":1,"name":"Arthur's 1of1 Bracelets","url":"https://arthurs1of1.trackt.tech"},
-        {"@type":"ListItem","position":2,"name":"Ridgeline Towing & Recovery","url":"https://demo.trackt.tech/towing/"},
-        {"@type":"ListItem","position":3,"name":"Gulf Breeze HVAC","url":"https://demo.trackt.tech/hvac/"},
-        {"@type":"ListItem","position":4,"name":"Ember & Oak Restaurant","url":"https://demo.trackt.tech/restaurant/"},
-        {"@type":"ListItem","position":5,"name":"Meridian Legal Group","url":"https://demo.trackt.tech/law/"},
-        {"@type":"ListItem","position":6,"name":"Newell Family Enterprise","url":"https://newell-family-enterprise.vercel.app/"}
+        {"@type":"ListItem","position":2,"name":"Newell Family Enterprise","url":"https://newell-family-enterprise.vercel.app/"},
+        {"@type":"ListItem","position":3,"name":"Ridgeline Towing & Recovery","url":"https://demo.trackt.tech/towing/"},
+        {"@type":"ListItem","position":4,"name":"Gulf Breeze HVAC","url":"https://demo.trackt.tech/hvac/"},
+        {"@type":"ListItem","position":5,"name":"Ember & Oak Restaurant","url":"https://demo.trackt.tech/restaurant/"},
+        {"@type":"ListItem","position":6,"name":"Meridian Legal Group","url":"https://demo.trackt.tech/law/"}
       ]
     }
   }
@@ -201,20 +201,6 @@
         border-bottom: none; border-right: 1px solid var(--border);
         min-height: 280px;
       }
-    }
-    .preview-bar {
-      display: flex; align-items: center; gap: 5px;
-      background: rgba(255,255,255,0.75);
-      border-bottom: 1px solid rgba(0,0,0,0.07);
-      padding: 8px 12px; flex-shrink: 0;
-    }
-    .p-dot { width: 9px; height: 9px; border-radius: 50%; }
-    .p-r { background: #ff5f56; } .p-y { background: #ffbd2e; } .p-g { background: #27c93f; }
-    .p-url {
-      flex: 1; background: rgba(0,0,0,0.06); border-radius: 4px;
-      padding: 2px 8px; font-size: 10px; font-family: monospace;
-      color: rgba(0,0,0,0.32); margin-left: 6px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .preview-content { flex: 1; overflow: hidden; }
 
@@ -405,10 +391,6 @@
       <!-- 0 — ARTHUR'S 1OF1 (CLIENT) -->
       <a href="https://arthurs1of1.trackt.tech" target="_blank" rel="noopener" class="demo-card demo-card--client fade-in" aria-label="View Arthur's 1of1 Bracelets — live client project with custom bracelet configurator and Shopify checkout">
         <div class="card-preview" aria-hidden="true">
-          <div class="preview-bar">
-            <span class="p-dot p-r"></span><span class="p-dot p-y"></span><span class="p-dot p-g"></span>
-            <span class="p-url">arthurs1of1.trackt.tech</span>
-          </div>
           <div class="preview-content">
             <img src="/images/arthurs1of1-demo.png" alt="Arthur's 1of1 bracelet configurator screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:200px;">
           </div>
@@ -427,36 +409,32 @@
         </div>
       </a>
 
-      <!-- 1 — TOWING -->
-      <a href="/towing/" class="demo-card flip fade-in" aria-label="View Ridgeline Towing &amp; Recovery demo — towing dispatch website">
+      <!-- 1 — NEWELL FAMILY ENTERPRISE (CLIENT) -->
+      <a href="https://newell-family-enterprise.vercel.app/" target="_blank" rel="noopener" class="demo-card demo-card--client flip fade-in" aria-label="View Newell Family Enterprise — live client soft washing website for Spring Hill, FL">
         <div class="card-preview" aria-hidden="true">
-          <div class="preview-bar">
-            <span class="p-dot p-r"></span><span class="p-dot p-y"></span><span class="p-dot p-g"></span>
-            <span class="p-url">ridgelinetowing.com</span>
-          </div>
           <div class="preview-content">
-            <div style="background:#0f0f0f;height:100%;padding:14px 16px;font-family:sans-serif;min-height:240px;">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-                <div>
-                  <div style="color:#f97316;font-size:11px;font-weight:900;letter-spacing:2px;">RIDGELINE</div>
-                  <div style="color:#6b7280;font-size:7px;letter-spacing:1px;margin-top:1px;">TOWING &amp; RECOVERY</div>
-                </div>
-                <div style="background:#f59e0b;color:#000;font-size:8px;font-weight:800;padding:5px 10px;border-radius:3px;letter-spacing:0.5px;">CALL NOW</div>
-              </div>
-              <div style="margin-bottom:12px;">
-                <div style="color:#fff;font-size:19px;font-weight:900;line-height:1.0;letter-spacing:-0.02em;">When You're Stuck,</div>
-                <div style="color:#f59e0b;font-size:19px;font-weight:900;line-height:1.0;letter-spacing:-0.02em;margin-bottom:5px;">We Move.</div>
-                <div style="color:#9ca3af;font-size:8px;">Tampa Bay · 24/7 Dispatch</div>
-              </div>
-              <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:6px;padding:10px 12px;">
-                <div style="color:#fbbf24;font-size:7px;font-weight:700;letter-spacing:1px;margin-bottom:7px;">REQUEST A TOW — STEP 1 OF 3</div>
-                <div style="background:#1a1a1a;border:1px solid #374151;border-radius:4px;padding:6px 9px;margin-bottom:5px;color:#4b5563;font-size:8px;">📍 Your current location...</div>
-                <div style="display:flex;gap:5px;">
-                  <div style="flex:1;background:#1a1a1a;border:1px solid #374151;border-radius:4px;padding:6px 9px;color:#4b5563;font-size:8px;">Vehicle type</div>
-                  <div style="background:#f59e0b;color:#000;font-size:8px;font-weight:800;padding:6px 10px;border-radius:4px;letter-spacing:0.3px;">Next →</div>
-                </div>
-              </div>
-            </div>
+            <img src="/images/newell-demo.png" alt="Newell Family Enterprise soft washing website screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:200px;">
+          </div>
+        </div>
+        <div class="card-copy">
+          <span class="card-tag tag-client">Client Project</span>
+          <h2 class="card-title">Newell Family Enterprise</h2>
+          <p class="card-problem">A Spring Hill soft washing company needing a site that builds trust instantly, showcases their work, and turns visitors into quote requests — without looking like every other pressure washing site in the area.</p>
+          <div class="card-features">
+            <span class="ftag">Before &amp; after gallery</span>
+            <span class="ftag">Instant quote form</span>
+            <span class="ftag">Trust signals</span>
+            <span class="ftag">Live Client</span>
+          </div>
+          <span class="card-cta">View live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 2 — TOWING -->
+      <a href="/towing/" class="demo-card fade-in" aria-label="View Ridgeline Towing &amp; Recovery demo — towing dispatch website">
+        <div class="card-preview" aria-hidden="true">
+          <div class="preview-content">
+            <img src="/images/ridgeline-demo.png" alt="Ridgeline Towing & Recovery website screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:200px;">
           </div>
         </div>
         <div class="card-copy">
@@ -472,39 +450,11 @@
         </div>
       </a>
 
-      <!-- 2 — HVAC -->
-      <a href="/hvac/" class="demo-card fade-in" aria-label="View Gulf Breeze HVAC demo — HVAC and AC repair website">
+      <!-- 3 — HVAC -->
+      <a href="/hvac/" class="demo-card flip fade-in" aria-label="View Gulf Breeze HVAC demo — HVAC and AC repair website">
         <div class="card-preview" aria-hidden="true">
-          <div class="preview-bar">
-            <span class="p-dot p-r"></span><span class="p-dot p-y"></span><span class="p-dot p-g"></span>
-            <span class="p-url">gulfbreezehvac.com</span>
-          </div>
           <div class="preview-content">
-            <div style="background:#0a1628;height:100%;padding:14px 16px;font-family:sans-serif;min-height:240px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;border-bottom:1px solid #1e3a5f;padding-bottom:8px;">
-                <div>
-                  <div style="color:#38bdf8;font-size:10px;font-weight:900;letter-spacing:1.5px;">GULF BREEZE</div>
-                  <div style="color:#7dd3fc;font-size:7px;letter-spacing:1px;margin-top:1px;">HVAC &amp; COOLING</div>
-                </div>
-                <div style="background:#0ea5e9;color:#fff;font-size:8px;font-weight:700;padding:4px 9px;border-radius:4px;">Request Service</div>
-              </div>
-              <div style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.35);border-radius:4px;padding:4px 8px;margin-bottom:8px;display:flex;align-items:center;gap:5px;">
-                <div style="width:6px;height:6px;border-radius:50%;background:#ef4444;flex-shrink:0;"></div>
-                <span style="color:#fca5a5;font-size:7px;font-weight:700;letter-spacing:0.3px;">24/7 EMERGENCY · SAME-DAY SERVICE AVAILABLE</span>
-              </div>
-              <div style="background:#0d1f3c;border:1px solid #1e3a5f;border-radius:6px;padding:8px 10px;margin-bottom:8px;">
-                <div style="color:#38bdf8;font-size:7px;font-weight:700;letter-spacing:1px;margin-bottom:6px;">REQUEST SERVICE</div>
-                <div style="background:#112240;border:1px solid #1e3a5f;border-radius:4px;padding:5px 8px;margin-bottom:4px;color:#475569;font-size:8px;">Your name...</div>
-                <div style="background:#112240;border:1px solid #1e3a5f;border-radius:4px;padding:5px 8px;margin-bottom:4px;display:flex;justify-content:space-between;"><span style="color:#475569;font-size:8px;">Issue type</span><span style="color:#475569;font-size:8px;">▾</span></div>
-                <div style="display:flex;gap:4px;"><div style="flex:1;background:#112240;border:1px solid #1e3a5f;border-radius:4px;padding:5px 8px;color:#475569;font-size:8px;">ZIP code</div><div style="background:#0ea5e9;color:#fff;font-size:8px;font-weight:700;padding:5px 10px;border-radius:4px;">Book →</div></div>
-              </div>
-              <div style="display:flex;flex-wrap:wrap;gap:4px;">
-                <span style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:#38bdf8;font-size:7px;padding:2px 7px;border-radius:100px;">AC Repair</span>
-                <span style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:#38bdf8;font-size:7px;padding:2px 7px;border-radius:100px;">Installation</span>
-                <span style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:#38bdf8;font-size:7px;padding:2px 7px;border-radius:100px;">Tune-Up</span>
-                <span style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:#38bdf8;font-size:7px;padding:2px 7px;border-radius:100px;">Maintenance Plans</span>
-              </div>
-            </div>
+            <img src="/images/gulf-breeze-hvac.png" alt="Gulf Breeze HVAC website screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:200px;">
           </div>
         </div>
         <div class="card-copy">
@@ -521,13 +471,9 @@
         </div>
       </a>
 
-      <!-- 3 — RESTAURANT -->
-      <a href="/restaurant/" class="demo-card flip fade-in" aria-label="View Ember &amp; Oak demo — restaurant website with online ordering">
+      <!-- 4 — RESTAURANT -->
+      <a href="/restaurant/" class="demo-card fade-in" aria-label="View Ember &amp; Oak demo — restaurant website with online ordering">
         <div class="card-preview" aria-hidden="true">
-          <div class="preview-bar">
-            <span class="p-dot p-r"></span><span class="p-dot p-y"></span><span class="p-dot p-g"></span>
-            <span class="p-url">emberandoak.com</span>
-          </div>
           <div class="preview-content">
             <div style="background:#1c1917;height:100%;padding:14px 16px;font-family:sans-serif;min-height:240px;">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid #292524;padding-bottom:8px;">
@@ -574,35 +520,11 @@
         </div>
       </a>
 
-      <!-- 4 — LAW -->
-      <a href="/law/" class="demo-card fade-in" aria-label="View Meridian Legal Group demo — law firm website">
+      <!-- 5 — LAW -->
+      <a href="/law/" class="demo-card flip fade-in" aria-label="View Meridian Legal Group demo — law firm website">
         <div class="card-preview" aria-hidden="true">
-          <div class="preview-bar">
-            <span class="p-dot p-r"></span><span class="p-dot p-y"></span><span class="p-dot p-g"></span>
-            <span class="p-url">meridianlegalgroup.com</span>
-          </div>
           <div class="preview-content">
-            <div style="background:#0f172a;height:100%;padding:14px 16px;font-family:sans-serif;min-height:240px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid #1e293b;padding-bottom:8px;">
-                <div>
-                  <div style="color:#c9a84c;font-size:9px;font-weight:900;letter-spacing:2px;">MERIDIAN LEGAL</div>
-                  <div style="color:#475569;font-size:7px;letter-spacing:1px;margin-top:1px;">GROUP · TAMPA, FL</div>
-                </div>
-                <div style="background:#c9a84c;color:#0f172a;font-size:8px;font-weight:700;padding:4px 9px;border-radius:4px;">Free Consultation</div>
-              </div>
-              <div style="display:flex;gap:5px;margin-bottom:8px;">
-                <div style="flex:1;background:#1e293b;border-radius:4px;padding:6px;text-align:center;"><div style="color:#c9a84c;font-size:11px;font-weight:800;">$50M+</div><div style="color:#475569;font-size:6px;letter-spacing:0.5px;">Recovered</div></div>
-                <div style="flex:1;background:#1e293b;border-radius:4px;padding:6px;text-align:center;"><div style="color:#c9a84c;font-size:11px;font-weight:800;">97%</div><div style="color:#475569;font-size:6px;letter-spacing:0.5px;">Success Rate</div></div>
-                <div style="flex:1;background:#1e293b;border-radius:4px;padding:6px;text-align:center;"><div style="color:#c9a84c;font-size:11px;font-weight:800;">15+</div><div style="color:#475569;font-size:6px;letter-spacing:0.5px;">Yrs Experience</div></div>
-              </div>
-              <div style="color:#475569;font-size:6px;font-weight:700;letter-spacing:1px;margin-bottom:6px;">PRACTICE AREAS</div>
-              <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:9px;">
-                <div style="background:#1e293b;border-left:3px solid #c9a84c;border-radius:2px;padding:4px 8px;color:#cbd5e1;font-size:8px;">Personal Injury</div>
-                <div style="background:#1e293b;border-left:3px solid #334155;border-radius:2px;padding:4px 8px;color:#94a3b8;font-size:8px;">Business Law</div>
-                <div style="background:#1e293b;border-left:3px solid #334155;border-radius:2px;padding:4px 8px;color:#94a3b8;font-size:8px;">Family Law</div>
-              </div>
-              <div style="background:#c9a84c;color:#0f172a;text-align:center;font-size:8px;font-weight:800;padding:7px;border-radius:4px;letter-spacing:0.5px;">Schedule Free Consultation →</div>
-            </div>
+            <img src="/images/meridian_law_group.png" alt="Meridian Legal Group website screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:200px;">
           </div>
         </div>
         <div class="card-copy">
@@ -616,31 +538,6 @@
             <span class="ftag">FAQ accordion</span>
           </div>
           <span class="card-cta">View live demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 5 — NEWELL FAMILY ENTERPRISE (CLIENT) -->
-      <a href="https://newell-family-enterprise.vercel.app/" target="_blank" rel="noopener" class="demo-card demo-card--client flip fade-in" aria-label="View Newell Family Enterprise — live client soft washing website for Spring Hill, FL">
-        <div class="card-preview" aria-hidden="true">
-          <div class="preview-bar">
-            <span class="p-dot p-r"></span><span class="p-dot p-y"></span><span class="p-dot p-g"></span>
-            <span class="p-url">newellfamilyenterprise.com</span>
-          </div>
-          <div class="preview-content">
-            <img src="/images/newell-demo.png" alt="Newell Family Enterprise soft washing website screenshot" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:200px;">
-          </div>
-        </div>
-        <div class="card-copy">
-          <span class="card-tag tag-client">Client Project</span>
-          <h2 class="card-title">Newell Family Enterprise</h2>
-          <p class="card-problem">A Spring Hill soft washing company needing a site that builds trust instantly, showcases their work, and turns visitors into quote requests — without looking like every other pressure washing site in the area.</p>
-          <div class="card-features">
-            <span class="ftag">Before &amp; after gallery</span>
-            <span class="ftag">Instant quote form</span>
-            <span class="ftag">Trust signals</span>
-            <span class="ftag">Live Client</span>
-          </div>
-          <span class="card-cta">View live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
         </div>
       </a>
 
